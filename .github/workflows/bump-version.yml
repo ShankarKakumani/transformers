@@ -1,4 +1,4 @@
-name: Bump Version on Tag
+name: Release on Tag
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - 'v*'
 
 jobs:
-  bump:
+  release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -15,6 +15,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
+          fetch-depth: 0
 
       - name: Extract version from tag
         id: version
@@ -32,10 +33,62 @@ jobs:
             .claude-plugin/marketplace.json > tmp.json \
             && mv tmp.json .claude-plugin/marketplace.json
 
-      - name: Commit and push
+      - name: Commit and push version bump
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add plugins/transformers/.claude-plugin/plugin.json .claude-plugin/marketplace.json
           git commit -m "chore: bump version to ${{ steps.version.outputs.VERSION }}"
           git push origin main
+
+      - name: Get previous tag
+        id: prev_tag
+        run: |
+          PREV=$(git tag --sort=-version:refname | grep '^v' | sed -n '2p')
+          echo "TAG=${PREV:-}" >> $GITHUB_OUTPUT
+
+      - name: Generate release notes
+        run: |
+          COMMANDS=$(ls plugins/transformers/commands/*.md 2>/dev/null | wc -l | tr -d ' ')
+          AGENTS=$(ls plugins/transformers/agents/*.md 2>/dev/null | wc -l | tr -d ' ')
+          SKILLS=$(find plugins/transformers/skills -name "SKILL.md" 2>/dev/null | wc -l | tr -d ' ')
+
+          cat > /tmp/release-notes.md << NOTES
+          ## Transformers ${GITHUB_REF_NAME}
+
+          **Plugin Stats:** ${COMMANDS} commands · ${AGENTS} agents · ${SKILLS} skills
+
+          ### Changes
+          NOTES
+
+          if [ -n "${{ steps.prev_tag.outputs.TAG }}" ]; then
+            git log ${{ steps.prev_tag.outputs.TAG }}..${GITHUB_REF_NAME} --pretty=format:"- %s" --no-merges | grep -v "chore: bump version" >> /tmp/release-notes.md
+          else
+            git log --pretty=format:"- %s" --no-merges -20 >> /tmp/release-notes.md
+          fi
+
+          cat >> /tmp/release-notes.md << 'NOTES'
+
+          ### Install / Update
+          ```bash
+          # First time
+          /plugin marketplace add ShankarKakumani/transformers
+          /plugin install transformers@transformers
+
+          # Update existing
+          /plugin marketplace update transformers
+          claude plugin update transformers@transformers
+          ```
+
+          ---
+          *"Till all are one."* — Optimus Prime
+          NOTES
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: "Transformers ${{ github.ref_name }}"
+          body_path: /tmp/release-notes.md
+          draft: false
+          prerelease: false
