@@ -4,4 +4,4 @@ description: Test attack patterns, coverage matrices, and reporting formats for 
 user-invocable: false
 ---
 
-!`cat "${CLAUDE_SKILL_DIR}/../../knowledge/test-strategies.md"`
+@${CLAUDE_PLUGIN_ROOT}/knowledge/test-strategies.md

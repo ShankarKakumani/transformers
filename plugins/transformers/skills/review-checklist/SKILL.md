@@ -4,4 +4,4 @@ description: Code review checklist covering pattern consistency, architecture, c
 user-invocable: false
 ---
 
-!`cat "${CLAUDE_SKILL_DIR}/../../knowledge/code-review-checklist.md"`
+@${CLAUDE_PLUGIN_ROOT}/knowledge/code-review-checklist.md

@@ -4,4 +4,4 @@ description: Build decomposition patterns, agent selection guide, and conflict r
 user-invocable: false
 ---
 
-!`cat "${CLAUDE_SKILL_DIR}/../../knowledge/build-patterns.md"`
+@${CLAUDE_PLUGIN_ROOT}/knowledge/build-patterns.md
