@@ -1,0 +1,31 @@
+{
+  "name": "transformers",
+  "version": "1.0.0",
+  "description": "AI-powered build and test orchestration with Transformer-inspired agents. Autobots build, Decepticons test.",
+  "author": "raknash",
+  "keywords": ["orchestration", "testing", "agents", "build"],
+  "skills": [
+    "skills/transformers",
+    "skills/autobots",
+    "skills/decepticons",
+    "skills/core-principles",
+    "skills/build-patterns",
+    "skills/test-strategies",
+    "skills/review-checklist"
+  ],
+  "hooks": "hooks/hooks.json",
+  "agents": [
+    "agents/optimus.md",
+    "agents/megatron.md",
+    "agents/prowl.md",
+    "agents/bumblebee.md",
+    "agents/ironhide.md",
+    "agents/ratchet.md",
+    "agents/wheeljack.md",
+    "agents/jazz.md",
+    "agents/soundwave.md",
+    "agents/shockwave.md",
+    "agents/starscream.md",
+    "agents/barricade.md"
+  ]
+}
