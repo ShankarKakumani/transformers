@@ -1,7 +1,7 @@
 ---
 description: Brainstorm approaches, explore tradeoffs, compare options. No code — just thinking and discussion.
 argument-hint: [problem, idea, or question to brainstorm]
-allowed-tools: [Agent, Read, Glob, Grep, WebSearch, WebFetch]
+allowed-tools: Agent, Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Brainstorm — Think Before Building

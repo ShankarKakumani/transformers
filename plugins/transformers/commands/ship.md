@@ -1,7 +1,7 @@
 ---
 description: Ship your code. Auto-detects branch, remembers reviewers, reviews before submitting.
 argument-hint: [optional: any context about the PR]
-allowed-tools: [Agent, Read, Glob, Grep, Bash, WebSearch, WebFetch]
+allowed-tools: Agent, Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Pull Request — Smart Submission

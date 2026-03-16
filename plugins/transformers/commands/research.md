@@ -1,7 +1,7 @@
 ---
 description: Deep research into a codebase area, library, or concept. Autobots explore from multiple angles. No building, just understanding.
 argument-hint: [topic, area, or question to research]
-allowed-tools: [Agent, Read, Glob, Grep, WebSearch, WebFetch]
+allowed-tools: Agent, Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Research — Deep Exploration

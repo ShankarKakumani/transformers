@@ -1,7 +1,7 @@
 ---
 description: Codebase explainer. Optimus reads and explains a feature, module, or entire codebase like onboarding a new developer.
 argument-hint: [feature, module, or area to explain]
-allowed-tools: [Agent, Read, Glob, Grep, WebSearch, WebFetch]
+allowed-tools: Agent, Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Explain — Codebase Onboarding

@@ -1,7 +1,7 @@
 ---
 description: Task estimator. Optimus decomposes a task and estimates complexity per chunk (S/M/L), not time.
 argument-hint: [task or feature to estimate]
-allowed-tools: [Agent, Read, Glob, Grep, WebSearch, WebFetch]
+allowed-tools: Agent, Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Estimate — Task Decomposition & Sizing

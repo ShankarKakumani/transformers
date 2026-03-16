@@ -1,7 +1,7 @@
 ---
 description: Test your code. Megatron attacks from every angle — unit, integration, E2E, security.
 argument-hint: [what to test or area of code]
-allowed-tools: [Agent, Read, Glob, Grep, WebSearch, WebFetch]
+allowed-tools: Agent, Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Decepticons — Test Assault

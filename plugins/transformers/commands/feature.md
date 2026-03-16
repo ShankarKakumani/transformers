@@ -1,7 +1,7 @@
 ---
 description: Full feature development — research, plan, build, review, test. The complete lifecycle with human approval at every gate.
 argument-hint: [feature description]
-allowed-tools: [Agent, Read, Glob, Grep, WebSearch, WebFetch]
+allowed-tools: Agent, Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Feature — Full Development Lifecycle

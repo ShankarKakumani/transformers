@@ -1,7 +1,7 @@
 ---
 description: Review-driven refactoring. Prowl identifies code smells, then Autobots fix them with your approval.
 argument-hint: [area to refactor or specific concern]
-allowed-tools: [Agent, Read, Glob, Grep, WebSearch, WebFetch]
+allowed-tools: Agent, Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Refactor — Prowl-Led Cleanup
