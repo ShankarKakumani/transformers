@@ -2,6 +2,7 @@
 description: Generate commit messages for staged changes. Reviews staged files, generates message, asks to push.
 argument-hint: [context about the changes]
 allowed-tools: Read, Glob, Grep, Bash
+model: sonnet
 ---
 
 # Commit Generator — Smart Commit Messages
