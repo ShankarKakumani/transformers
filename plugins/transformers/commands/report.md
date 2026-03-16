@@ -1,6 +1,6 @@
 ---
 description: What did we do? EOD or weekly summary of activity — features built, bugs fixed, decisions made. Reads from activity log.
-argument-hint: [optional: today, week, or specific date range]
+argument-hint: [today, week, or specific date range]
 allowed-tools: Agent, Read, Glob, Grep, WebSearch, WebFetch
 ---
 

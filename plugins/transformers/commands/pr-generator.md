@@ -1,6 +1,6 @@
 ---
 description: Generate a PR with review. Auto-detects platform, account, branch. Remembers preferences per project.
-argument-hint: [optional: any context about the PR]
+argument-hint: [any context about the PR]
 allowed-tools: Agent, Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch
 ---
 

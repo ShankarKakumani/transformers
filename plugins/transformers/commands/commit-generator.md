@@ -1,6 +1,6 @@
 ---
 description: Generate commit messages for staged changes. Reviews staged files, generates message, asks to push.
-argument-hint: [optional: context about the changes]
+argument-hint: [context about the changes]
 allowed-tools: Read, Glob, Grep, Bash
 ---
 

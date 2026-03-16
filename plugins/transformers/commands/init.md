@@ -1,6 +1,6 @@
 ---
 description: Analyze the project and build context for all Transformers agents. Run once to onboard, again to update.
-argument-hint: [optional: --update to only refresh changed areas]
+argument-hint: [--update to only refresh changed areas]
 allowed-tools: Agent, Read, Glob, Grep, WebSearch, WebFetch, Write
 ---
 
