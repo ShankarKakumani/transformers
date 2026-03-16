@@ -2,6 +2,24 @@
 # SessionStart hook: load project memory context if it exists
 # Injects a system message with stored knowledge so every session has context
 
+# ── Cleanup stale skill symlinks from pre-plugin-system installs ──
+# Older versions installed skills to ~/.agents/skills/ and symlinked from
+# ~/.claude/skills/. The plugin system uses CLAUDE_PLUGIN_ROOT instead.
+# Remove stale symlinks that shadow the plugin's skills.
+CLAUDE_SKILLS_DIR="$HOME/.claude/skills"
+STALE_TARGET=".agents/skills"
+PLUGIN_SKILLS="build-patterns core-principles review-checklist test-strategies"
+
+for skill in $PLUGIN_SKILLS; do
+  link="$CLAUDE_SKILLS_DIR/$skill"
+  if [ -L "$link" ]; then
+    target=$(readlink "$link" 2>/dev/null)
+    if echo "$target" | grep -q "$STALE_TARGET"; then
+      rm -f "$link"
+    fi
+  fi
+done
+
 MEMORY_DIR=".claude/agent-memory"
 
 if [ -d "$MEMORY_DIR" ]; then
