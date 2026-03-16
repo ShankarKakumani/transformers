@@ -38,7 +38,7 @@ Each agent returns: key files found, how the flow works, gotchas discovered.
 
 **DO NOT skip this step. DO NOT use Explore agent instead.**
 
-## Phase 2: Explain
+## Phase 3: Explain
 
 Present the explanation in layers:
 
