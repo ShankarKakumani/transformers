@@ -1,5 +1,5 @@
 ---
-description: Smart PR generator. Figures out target branch, remembers reviewers, reviews code before submitting.
+description: Ship your code. Auto-detects branch, remembers reviewers, reviews before submitting.
 argument-hint: [optional: any context about the PR]
 allowed-tools: [Agent, Read, Glob, Grep, Bash, WebSearch, WebFetch]
 ---
@@ -7,6 +7,12 @@ allowed-tools: [Agent, Read, Glob, Grep, Bash, WebSearch, WebFetch]
 # Pull Request — Smart Submission
 
 Generate a quality PR with the least friction possible.
+
+## HARD RULES
+
+1. **NEVER use `subagent_type: Explore`, `Plan`, or `general-purpose`**. Reviews go through `prowl` and `barricade`.
+2. **Never create a PR without explicit user approval.**
+3. **Never skip the security scan.**
 
 ## Phase 0: Gather Context Automatically
 

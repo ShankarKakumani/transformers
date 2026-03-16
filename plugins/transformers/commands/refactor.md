@@ -8,6 +8,12 @@ allowed-tools: [Agent, Read, Glob, Grep, WebSearch, WebFetch]
 
 Review first. Fix second. Nothing changes without your approval.
 
+## HARD RULES
+
+1. **NEVER use `subagent_type: Explore`, `Plan`, or `general-purpose`**. ALL work goes through named Transformers.
+2. **Quick orientation only (2-3 tool calls)**, then delegate to Prowl and Autobots.
+3. **Every fix chunk MUST have a named Autobot assigned.**
+
 ## Phase 0: Understand the Scope
 
 - If `$ARGUMENTS` is vague or missing → ask: "What do you want refactored? A specific file, module, pattern, or should I scan for issues?"
