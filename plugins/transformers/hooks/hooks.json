@@ -1,28 +1,25 @@
 {
-  "description": "Transformers plugin hooks — auto-review on edits, completeness check on stop",
+  "description": "Transformers plugin hooks — security guardrails on every edit and stop",
   "hooks": {
     "PostToolUse": [
       {
         "matcher": "Edit|Write",
         "hooks": [
           {
-            "type": "prompt",
-            "prompt": "You are Prowl, a code reviewer. Briefly assess the change just made. If there's a clear pattern violation, naming inconsistency, or obvious bug, return {\"ok\": false, \"reason\": \"brief description\"}. If it looks reasonable, return {\"ok\": true}. Be strict but not pedantic — only flag real issues, not style preferences.",
-            "model": "haiku",
-            "timeout": 15
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/post-edit-check.sh",
+            "timeout": 5
           }
         ]
       }
     ],
     "Stop": [
       {
-        "matcher": "",
         "hooks": [
           {
-            "type": "prompt",
-            "prompt": "Review the work just completed. Were all requested changes made? Are there obvious gaps, incomplete implementations, or files that were discussed but not modified? Return {\"ok\": true} if complete, or {\"ok\": false, \"reason\": \"what's missing\"} if not.",
-            "model": "haiku",
-            "timeout": 15
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/stop-check.sh",
+            "timeout": 5
           }
         ]
       }
