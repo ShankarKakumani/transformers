@@ -1,6 +1,6 @@
 ---
 name: auto-init
-description: Auto-checks project context, logs activity via scribe, and manages the activity log. Loaded by Optimus and Megatron on every command.
+description: Auto-checks project context, logs activity via scribe, and manages the activity log and artifact directories. Loaded by Optimus and Megatron on every command.
 user-invocable: false
 ---
 
@@ -16,6 +16,24 @@ Before starting any work:
    - If older than 24 hours → mention once: "Project context is from [date]. Run `/transformers:init --update` to refresh, or I'll work with what we have."
    - Don't block — just mention it.
 
+## Artifact Directory Check
+
+For lifecycle commands (`feature`, `bugfix`):
+
+1. **Check for in-progress work** in `.claude/transformers/active/`
+   - If a matching artifact directory exists with `status.md` showing incomplete work → "Found in-progress work for [name]. Want to resume or start fresh?"
+   - If starting fresh with a name collision → append a number (`feature-search-2`)
+
+2. **Ensure directory structure exists**:
+```
+.claude/transformers/
+├── project-context.md    ← from /transformers:init
+├── activity.log          ← scribe appends after every command
+├── active/               ← in-progress feature/bugfix artifacts
+├── completed/            ← finished feature/bugfix artifacts
+└── reports/              ← from /transformers:report
+```
+
 ## Activity Logging
 
 **After completing any command**, spawn `scribe` to log what was done.
@@ -27,17 +45,6 @@ YYYY-MM-DD HH:MM [command] [brief description] [files touched count]
 
 Example instructions to scribe:
 - "Append to `.claude/transformers/activity.log`: `2026-03-16 14:30 feature Built dark mode toggle — 4 files changed`"
-- "Append to `.claude/transformers/activity.log`: `2026-03-16 16:00 test Megatron tested auth module — 2 issues found (1 HIGH, 1 LOW)`"
+- "Append to `.claude/transformers/activity.log`: `2026-03-16 16:00 bugfix Fixed null pointer in auth flow — 2 files changed`"
 
 Scribe handles directory creation, appending, and pruning entries older than 7 days.
-
-## Directory Structure
-
-Scribe ensures this structure exists:
-```
-.claude/transformers/
-├── project-context.md    ← from /transformers:init
-├── activity.log          ← scribe appends after every command
-└── reports/              ← from /transformers:report
-    └── 2026-03-16.md
-```
