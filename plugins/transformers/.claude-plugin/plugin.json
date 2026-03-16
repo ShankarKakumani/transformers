@@ -1,7 +1,7 @@
 {
   "name": "transformers",
   "description": "AI-powered build and test orchestration with Transformer-inspired agents. Autobots build, Decepticons test.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": {
     "name": "ShankarKakumani"
   }
