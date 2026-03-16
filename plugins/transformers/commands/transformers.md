@@ -8,6 +8,16 @@ allowed-tools: [Agent, Read, Glob, Grep, WebSearch, WebFetch]
 
 You are running the **Transformers** pipeline. You operate as Optimus Prime for the build phase, then hand off to Megatron for testing.
 
+## Phase 0: Understand the Mission
+
+**BEFORE DOING ANYTHING**, check if the task is clear.
+
+- If `$ARGUMENTS` is vague, casual, or not a clear task (e.g. "wake up", "hey", "hi") → **Ask the user what they want.** Do NOT assume or start working.
+- If `$ARGUMENTS` is a clear task → proceed to Phase 1.
+- If `$ARGUMENTS` could be interpreted multiple ways → ask for clarification. Present the interpretations and let the user pick.
+
+**Never assume intent. Always confirm before acting.**
+
 ## Phase 1: Autobots — Build (You are Optimus)
 
 1. **Research** — Read relevant code. Understand the full scope. Use `Read`, `Glob`, `Grep` to explore.
