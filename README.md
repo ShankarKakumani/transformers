@@ -1,33 +1,30 @@
 # Transformers
 
 ```
-              ___________________________
-             /                           \
-            /    ____           ____      \
-           |    /    \  ___  /    \     |
-           |   | (o) | /   \ | (o) |    |
-           |    \____/ | | | \____/     |
-            \         | \_/ |          /
-             \   _____|     |_____   /
-              | |     \_____/     | |
-              | |   ___________   | |
-              | |  |           |  | |
-              | |  |  |     |  |  | |
-              | |  |  |_____|  |  | |
-              | |  |___________|  | |
-              |_|                 |_|
-             /   \               /   \
-            /_____\             /_____\
+──────────▄▄▄▄▄▄▄▄▄──────────
+───────▄█████████████▄───────
+▐███▌─█████████████████─▐███▌
+─████▄─▀███▄─────▄███▀─▄████─
+─▐█████▄─▀███▄─▄███▀─▄█████▌─
+──██▄▀███▄─▀█████▀─▄███▀▄██──
+──▐█▀█▄▀███─▄─▀─▄─███▀▄█▀█▌──
+───██▄▀█▄██─██▄██─██▄█▀▄██───
+────▀██▄▀██─█████─██▀▄██▀────
+───▄──▀████─█████─████▀──▄───
+───██────────███────────██───
+───██▄────▄█─███─█▄────▄██───
+───████─▄███─███─███▄─████───
+───████─████─███─████─████───
+───████─████─███─████─████───
+───████─████▄▄▄▄▄████─████───
+───▀███─█████████████─███▀───
+─────▀█─███─▄▄▄▄▄─███─█▀─────
+────────▀█▌▐█████▌▐█▀────────
+───────────███████───────────
 
-     _____ ____      _    _   _ ____  _____ ___  ____  __  __ _____ ____  ____
-    |_   _|  _ \    / \  | \ | / ___||  ___/ _ \|  _ \|  \/  | ____|  _ \/ ___|
-      | | | |_) |  / _ \ |  \| \___ \| |_ | | | | |_) | |\/| |  _| | |_) \___ \
-      | | |  _ <  / ___ \| |\  |___) |  _|| |_| |  _ <| |  | | |___|  _ < ___) |
-      |_| |_| \_\/_/   \_\_| \_|____/|_|   \___/|_| \_\_|  |_|_____|_| \_\____/
-
-              ╔══════════════════════════════════════════╗
-              ║    AUTOBOTS BUILD. DECEPTICONS TEST.     ║
-              ╚══════════════════════════════════════════╝
+ ╔══════════════════════════════════════╗
+ ║   AUTOBOTS BUILD. DECEPTICONS TEST. ║
+ ╚══════════════════════════════════════╝
 ```
 
 AI-powered build and test orchestration plugin for [Claude Code](https://claude.ai/code). Autobots build. Decepticons test.
@@ -141,12 +138,15 @@ Every agent follows these rules:
 ```
 transformers/
 ├── .claude-plugin/
-│   ├── plugin.json
 │   └── marketplace.json
-├── agents/              (12 agents with personas)
-├── skills/              (3 user-invocable + 4 knowledge skills)
-├── hooks/               (auto-review on edits, completeness check)
-└── knowledge/           (build patterns, test strategies, review checklist, core principles)
+├── plugins/transformers/
+│   ├── .claude-plugin/plugin.json
+│   ├── agents/          (12 agents with personas)
+│   ├── commands/        (3 slash commands: /transformers, /autobots, /decepticons)
+│   ├── skills/          (4 knowledge skills injected into agents)
+│   ├── hooks/           (auto-review on edits, completeness check)
+│   └── knowledge/       (build patterns, test strategies, review checklist, core principles)
+└── README.md
 ```
 
 ## License

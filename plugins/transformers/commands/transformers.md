@@ -1,9 +1,7 @@
 ---
-name: transformers
-description: Full build + test pipeline. Optimus orchestrates the build with Autobots, Prowl reviews, then Megatron commands Decepticons to test. Use when you want the complete pipeline — build, review, test.
-user-invocable: true
+description: Full build + test pipeline. Optimus orchestrates the build with Autobots, Prowl reviews, then Megatron commands Decepticons to test.
 argument-hint: [task description]
-allowed-tools: Agent, Read, Glob, Grep
+allowed-tools: [Agent, Read, Glob, Grep, WebSearch, WebFetch]
 ---
 
 # Transformers — Full Pipeline

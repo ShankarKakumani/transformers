@@ -1,9 +1,7 @@
 ---
-name: decepticons
-description: Test pipeline only. Megatron commands Decepticons to attack the codebase from every angle — unit, integration, E2E, security. Use when you want to test existing code without building.
-user-invocable: true
+description: Test pipeline only. Megatron commands Decepticons to attack the codebase from every angle — unit, integration, E2E, security.
 argument-hint: [what to test or area of code]
-allowed-tools: Agent, Read, Glob, Grep
+allowed-tools: [Agent, Read, Glob, Grep, WebSearch, WebFetch]
 ---
 
 # Decepticons — Test Assault

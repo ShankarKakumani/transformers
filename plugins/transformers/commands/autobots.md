@@ -1,9 +1,7 @@
 ---
-name: autobots
-description: Build pipeline only. Optimus orchestrates Autobots to build, then Prowl reviews. No testing phase. Use when you want to build and review without running the Decepticon test assault.
-user-invocable: true
+description: Build pipeline only. Optimus orchestrates Autobots to build, then Prowl reviews. No testing phase.
 argument-hint: [task description]
-allowed-tools: Agent, Read, Glob, Grep
+allowed-tools: [Agent, Read, Glob, Grep, WebSearch, WebFetch]
 ---
 
 # Autobots — Build & Review

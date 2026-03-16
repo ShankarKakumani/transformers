@@ -1,4 +1,5 @@
 {
+  "description": "Transformers plugin hooks — auto-review on edits, completeness check on stop",
   "hooks": {
     "PostToolUse": [
       {
