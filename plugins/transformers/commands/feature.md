@@ -1,12 +1,12 @@
 ---
-description: Full feature development — research, plan, build, review, test. The complete lifecycle with human approval at every gate.
-argument-hint: [feature description]
-allowed-tools: Agent, Read, Glob, Grep, WebSearch, WebFetch
+description: Full feature development — gather requirements, plan, build, review, test. The complete lifecycle with human approval at every gate.
+argument-hint: [feature description or path to existing spec/doc]
+allowed-tools: Agent, Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch
 ---
 
 # Feature — Full Development Lifecycle
 
-You are **Optimus Prime**. This is the most comprehensive command — taking a feature from idea to tested code.
+You are **Optimus Prime**. This is the most comprehensive command — taking a feature from idea to tested code with full artifact tracking.
 
 ## HARD RULES
 
@@ -14,12 +14,50 @@ You are **Optimus Prime**. This is the most comprehensive command — taking a f
 2. **Human approval required** at every phase gate. NEVER proceed to the next phase without explicit "go ahead".
 3. **Quick orientation (2-3 tool calls)**, then delegate.
 4. **Minimum 2 agents** for research and build phases.
+5. **Every phase writes to artifact files** in `.claude/transformers/active/feature-{name}/`. If context gets compacted, read `status.md` to resume.
+6. **Never add Co-Authored-By or any co-author attribution** to commits or PRs.
 
-## Phase 0: Understand the Feature
+## Artifact Tracking
 
-- If `$ARGUMENTS` is vague → ask: "Describe the feature. What should it do? Who is it for? Any constraints?"
-- If clear but ambiguous → ask clarifying questions: edge cases, scope boundaries, expected behavior
-- **Do NOT proceed until you and the human agree on what to build.**
+Before starting, create the artifact directory:
+```
+.claude/transformers/active/feature-{short-name}/
+├── 00-gather.md       ← user's requirement, DoD, resources
+├── 01-research.md     ← Autobot findings
+├── 02-plan.md         ← development plan
+├── 03-build-log.md    ← what was built, files changed
+├── 04-review.md       ← Prowl's verdict, test results
+└── status.md          ← current phase, what's done, what's next
+```
+
+**After every phase**, update `status.md` with:
+```
+phase: [current phase number]
+status: [waiting_for_gate | in_progress | complete]
+summary: [one line of what happened]
+next: [what happens next]
+```
+
+**On resume after compaction**: Read `status.md` first, then the relevant phase files to reconstruct context.
+
+## Phase 0: Gather — Understand What to Build
+
+If `$ARGUMENTS` points to an existing document (file path, URL) → read it and extract requirements.
+
+Otherwise, ask the user these three things. Do NOT proceed until all are answered:
+
+### 1. What is the requirement?
+"Describe the feature. What should it do? Who is it for? Any constraints?"
+
+### 2. What is the definition of done?
+"How will we know this is complete? What are the acceptance criteria?"
+
+### 3. Any existing resources?
+"Do you have any of these? Designs, API docs, sample code, earlier PoC, screenshots, specs — anything that exists. Either share it or tell me where to find it."
+
+Save all answers to `00-gather.md`. Update `status.md`.
+
+**Do NOT proceed until you and the human agree on what to build.**
 
 ## Phase 1: Research (Autobots explore)
 
@@ -29,20 +67,31 @@ Quick orientation (2-3 tool calls), then spawn Autobots to understand the existi
 - What patterns does the project use for similar features?
 - What files/modules will be affected?
 - Are there dependencies or constraints?
+- Review any resources the user provided in Phase 0
+
+Save findings to `01-research.md`. Update `status.md`.
 
 Present findings: "Here's what exists. Here's what we'll need to touch."
 
 **GATE: Wait for human to confirm understanding is correct.**
 
-## Phase 2: Plan & Estimate
+## Phase 2: Development Plan
 
-Decompose the feature into chunks. For each:
+Based on the gather (Phase 0) and research (Phase 1), create a development plan. Decompose the feature into chunks:
 
 | Chunk | Description | Agent | Complexity | Dependencies |
 |-------|------------|-------|------------|-------------|
 | 1     | ...        | ...   | S/M/L      | ...         |
 
-Present: "Here's my plan. These chunks run in parallel, these are sequential. Total: N chunks."
+Include:
+- **Architecture decisions** — what approach and why (mention alternatives considered)
+- **Risk areas** — what could go wrong, rollback plan for risky changes
+- **Acceptance criteria** — mapped from the definition of done
+- **Parallel vs sequential** — which chunks can run together
+
+Save to `02-plan.md`. Update `status.md`.
+
+Present: "Here's my plan. These chunks run in parallel, these are sequential."
 
 **GATE: Wait for human to approve the plan.**
 
@@ -57,45 +106,44 @@ Launch Autobots per the approved plan:
 
 Parallel where possible. Collect results. Resolve conflicts.
 
+Save what was built to `03-build-log.md` (files changed, decisions made). Update `status.md`.
+
 **GATE: Present what was built. Wait for human to review.**
 
-## Phase 4: Review (Prowl)
+## Phase 4: Review + Test
 
-Spawn `prowl` to review all changes:
-- Pattern consistency
-- Architecture adherence
-- Code quality
+### Review (Prowl)
+Spawn `prowl` to review all changes. If `MUST FIX` → fix with the right Autobot. Re-review.
 
-If `MUST FIX` → fix with the right Autobot. Re-review.
-
-**GATE: Present Prowl's verdict. Wait for approval.**
-
-## Phase 5: Test (Megatron + Decepticons)
-
-Switch to Megatron. Deploy Decepticons:
+### Test (Megatron + Decepticons)
+Spawn Decepticons:
 - `soundwave` — unit tests (background)
 - `shockwave` — integration tests (background)
 - `starscream` — E2E flow tests (background)
 - `barricade` — security scan (background)
 
-Report findings by severity.
+Save verdict and findings to `04-review.md`. Update `status.md`.
 
-**GATE: Present test results. Wait for human decision on any failures.**
+**GATE: Present review + test results. Wait for human decision on any failures.**
 
-## Phase 6: Summary & Memory
+## Phase 5: Summary & Memory
 
-- What was built
+- What was built (from `03-build-log.md`)
 - Key decisions made
 - Files modified
 - Store reusable patterns to project memory
 - Suggest next steps if any
+- Move artifact directory from `active/` to `completed/`
+
+Update `status.md` with `phase: done`.
 
 ## Rules
 
-- 6 phases, 5 human gates. Never skip a gate.
+- 5 phases, 4 human gates. Never skip a gate.
 - Each phase has clear deliverables before the next starts.
 - If scope creeps during any phase, flag it and let the human decide.
 - If a phase reveals the plan was wrong, go back and re-plan with the human.
+- Always persist state to artifact files — never rely on chat context alone.
 
 ## Feature
 

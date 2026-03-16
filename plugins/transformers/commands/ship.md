@@ -1,7 +1,7 @@
 ---
 description: Ship your code. Auto-detects branch, remembers reviewers, reviews before submitting.
 argument-hint: [optional: any context about the PR]
-allowed-tools: Agent, Read, Glob, Grep, Bash, WebSearch, WebFetch
+allowed-tools: Agent, Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch
 ---
 
 # Pull Request — Smart Submission
@@ -58,6 +58,15 @@ Present findings:
 - If clean → proceed
 
 **Wait for approval if issues found.**
+
+### Fix Critical Issues (if approved)
+
+Spawn the right Autobot to fix each issue:
+- `ironhide` for backend/logic fixes
+- `bumblebee` for UI fixes
+- `jazz` for quick patches
+
+Re-run Prowl on the fixes. Repeat until clean or user says ship anyway.
 
 ## Phase 3: Generate Title & Summary
 

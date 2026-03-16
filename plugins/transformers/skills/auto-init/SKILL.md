@@ -1,6 +1,6 @@
 ---
 name: auto-init
-description: Auto-checks project context, logs activity, and cleans up old data. Loaded by Optimus and Megatron on every command.
+description: Auto-checks project context, logs activity via scribe, and manages the activity log. Loaded by Optimus and Megatron on every command.
 user-invocable: false
 ---
 
@@ -18,30 +18,26 @@ Before starting any work:
 
 ## Activity Logging
 
-**After completing any command**, log what was done:
+**After completing any command**, spawn `scribe` to log what was done.
 
-1. **Append** a one-line entry to `.claude/transformers/activity.log`:
-   ```
-   [YYYY-MM-DD HH:MM] [command] [brief description] [files touched count]
-   ```
-   Example:
-   ```
-   2026-03-16 14:30 feature Built dark mode toggle — 4 files changed
-   2026-03-16 15:45 debug Fixed null error in login flow — root cause: missing null check in auth_bloc.dart
-   2026-03-16 16:00 test Megatron tested auth module — 2 issues found (1 HIGH, 1 LOW)
-   ```
+Tell scribe exactly what to write — one line in this format:
+```
+YYYY-MM-DD HH:MM [command] [brief description] [files touched count]
+```
 
-2. **Create** `.claude/transformers/` directory and `activity.log` if they don't exist.
+Example instructions to scribe:
+- "Append to `.claude/transformers/activity.log`: `2026-03-16 14:30 feature Built dark mode toggle — 4 files changed`"
+- "Append to `.claude/transformers/activity.log`: `2026-03-16 16:00 test Megatron tested auth module — 2 issues found (1 HIGH, 1 LOW)`"
 
-3. **Cleanup** — if the log has entries older than 7 days, remove them. Keep only the last 7 days.
+Scribe handles directory creation, appending, and pruning entries older than 7 days.
 
 ## Directory Structure
 
-Ensure this structure exists (create as needed):
+Scribe ensures this structure exists:
 ```
 .claude/transformers/
 ├── project-context.md    ← from /transformers:init
-├── activity.log          ← append after every command
+├── activity.log          ← scribe appends after every command
 └── reports/              ← from /transformers:report
     └── 2026-03-16.md
 ```

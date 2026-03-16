@@ -1,7 +1,7 @@
 ---
 description: Fast debugging. Jazz traces an error backwards from symptoms to root cause. No orchestration overhead.
 argument-hint: [error message, bug description, or screenshot]
-allowed-tools: Agent, Read, Glob, Grep, Bash, WebSearch, WebFetch
+allowed-tools: Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch
 ---
 
 # Debug — Jazz Mode
