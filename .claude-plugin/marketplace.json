@@ -10,7 +10,7 @@
     {
       "name": "transformers",
       "description": "Autobots build, Decepticons test. Full orchestration pipeline for Claude Code.",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": {
         "name": "ShankarKakumani"
       },
