@@ -14,7 +14,7 @@
       "author": {
         "name": "ShankarKakumani"
       },
-      "source": ".",
+      "source": "./plugins/transformers",
       "category": "development"
     }
   ]
