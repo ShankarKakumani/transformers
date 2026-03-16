@@ -1,26 +1,26 @@
 # Transformers
 
 ```
-                ───────────────▄▄▄▄▄▄▄▄▄▄▄▄▄───────────────
-                ──────────▄████████████████████▄──────────
-                ▐█████▌─████████████████████████─▐█████▌
-                ─██████▄──▀████▄───────▄████▀──▄██████─
-                ─▐████████▄──▀████▄─▄████▀──▄████████▌─
-                ───███▄▀█████▄──▀██████▀──▄█████▀▄███───
-                ───▐██▀██▄▀████──▄──▀──▄──████▀▄██▀██▌───
-                ────███▄▀██▄███──███▄███──███▄██▀▄███────
-                ─────▀████▄▀███──██████──███▀▄████▀─────
-                ────▄───▀██████──██████──██████▀───▄────
-                ────███──────────██████──────────███────
-                ────███▄─────▄██─██████─██▄─────▄███────
-                ────██████─▄████─██████─████▄─██████────
-                ────██████─█████─██████─█████─██████────
-                ────██████─█████─██████─█████─██████────
-                ────██████─█████▄▄▄▄▄▄▄█████─██████────
-                ────▀█████─███████████████████─█████▀────
-                ──────▀███─████──▄▄▄▄▄──████─███▀──────
-                ──────────▀███▌▐███████▌▐███▀──────────
-                ───────────────████████████───────────────
+                               ▄▄▄▄▄▄▄▄▄▄▄▄▄
+                          ▄████████████████████▄
+                ▐█████▌ ████████████████████████ ▐█████▌
+                 ██████▄  ▀████▄       ▄████▀  ▄██████
+                 ▐████████▄  ▀████▄ ▄████▀  ▄████████▌
+                   ███▄▀█████▄  ▀██████▀  ▄█████▀▄███
+                   ▐██▀██▄▀████  ▄  ▀  ▄  ████▀▄██▀██▌
+                    ███▄▀██▄███  ███▄███  ███▄██▀▄███
+                     ▀████▄▀███  ██████  ███▀▄████▀
+                    ▄   ▀██████  ██████  ██████▀   ▄
+                    ███          ██████          ███
+                    ███▄     ▄██ ██████ ██▄     ▄███
+                    ██████ ▄████ ██████ ████▄ ██████
+                    ██████ █████ ██████ █████ ██████
+                    ██████ █████ ██████ █████ ██████
+                    ██████ █████▄▄▄▄▄▄▄█████ ██████
+                    ▀█████ ███████████████████ █████▀
+                      ▀███ ████  ▄▄▄▄▄  ████ ███▀
+                          ▀███▌▐███████▌▐███▀
+                               ████████████
 
                 ╔══════════════════════════════════════════╗
                 ║     AUTOBOTS BUILD. DECEPTICONS TEST.    ║
@@ -67,9 +67,33 @@ A Claude Code plugin that gives you a team of specialized AI agents, each with a
 /plugin install transformers@transformers
 ```
 
-Or test locally:
+### Update to latest version
 ```bash
-claude --plugin-dir ~/path/to/transformers
+claude plugin update transformers@transformers
+```
+
+### Uninstall
+```bash
+claude plugin uninstall transformers@transformers
+```
+
+### Remove marketplace entirely
+```bash
+/plugin marketplace remove transformers
+```
+
+### Troubleshooting stale cache
+If you get errors after updating, clear the cache and reinstall:
+```bash
+rm -rf ~/.claude/plugins/cache/transformers
+/plugin marketplace remove transformers
+/plugin marketplace add ShankarKakumani/transformers
+/plugin install transformers@transformers
+```
+
+### Test locally (development)
+```bash
+claude --plugin-dir ~/path/to/transformers/plugins/transformers
 ```
 
 ## Usage
