@@ -16,6 +16,19 @@ Before starting any work:
    - If older than 24 hours → mention once: "Project context is from [date]. Run `/transformers:init --update` to refresh, or I'll work with what we have."
    - Don't block — just mention it.
 
+## Memory Check
+
+Before starting work, load project memory:
+
+1. **Long-term memory index** — read `.claude/transformers/memory/long-term/index.md` if it exists
+   - Silently absorb relevant learnings. Don't announce them unless directly relevant to the current task.
+   - If a learning is relevant, read the full category file for details.
+
+2. **Temp memory** — read `.claude/transformers/memory/temp.md` if it exists
+   - These are learnings from earlier in this conversation. Apply them.
+
+3. If neither exists → no memory yet. Proceed normally. Memory will grow as agents work.
+
 ## Artifact Directory Check
 
 For lifecycle commands (`feature`, `bugfix`):
@@ -29,6 +42,11 @@ For lifecycle commands (`feature`, `bugfix`):
 .claude/transformers/
 ├── project-context.md    ← from /transformers:init
 ├── activity.log          ← scribe appends after every command
+├── memory/
+│   ├── temp.md           ← per-conversation learnings
+│   └── long-term/        ← cross-conversation learnings
+│       ├── index.md      ← one-line summaries (loaded on every command)
+│       └── [category].md ← detailed learnings by topic
 ├── active/               ← in-progress feature/bugfix artifacts
 ├── completed/            ← finished feature/bugfix artifacts
 └── reports/              ← from /transformers:report

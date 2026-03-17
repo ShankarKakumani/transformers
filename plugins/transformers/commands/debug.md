@@ -1,7 +1,7 @@
 ---
 description: Fast debugging. Jazz traces an error backwards from symptoms to root cause. No orchestration overhead.
 argument-hint: [error message, bug description, or screenshot]
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch
+allowed-tools: Agent, Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch
 ---
 
 # Debug — Jazz Mode
@@ -56,6 +56,25 @@ If Phases 1-3 didn't find the root cause, pivot — don't repeat the same approa
 ── GATE ── Wait for approval before applying the fix.
 
 - If the fix is risky, say so: "This touches a critical path. Here's the risk."
+
+## Phase 6: Remember
+
+After fixing (or even if you couldn't fix), check: did you learn something reusable?
+
+- A debugging shortcut for this codebase?
+- A root cause pattern that might recur?
+- A workaround that wasn't obvious?
+
+If yes, spawn Scribe to save it:
+- Session learning → "Append to `.claude/transformers/memory/temp.md`: [entry]"
+- Permanent learning → "Add to `.claude/transformers/memory/long-term/debugging-rules.md`: [entry]. Update index.md."
+
+Also spawn Scribe to log the activity:
+- "Append to `.claude/transformers/activity.log`: `YYYY-MM-DD HH:MM debug [brief description] [files touched count]`"
+
+## Memory Check
+
+Before starting, read `.claude/transformers/memory/long-term/index.md` and `temp.md` if they exist. Past debugging learnings for this project may save you time.
 
 ## Rules
 

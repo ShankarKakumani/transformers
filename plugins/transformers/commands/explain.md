@@ -61,6 +61,10 @@ The key flow in 3-5 bullet points. No code.
 ### Layer 5: Deep dive (on request)
 Only if the human asks — show specific code paths, trace specific flows.
 
+## Phase 4: Save Learnings
+
+If the explanation uncovered gotchas or non-obvious patterns, spawn Scribe to save them to long-term memory. Keep it to genuinely surprising findings only.
+
 ## Rules
 
 - Explain like you're onboarding a smart developer who hasn't seen this code before

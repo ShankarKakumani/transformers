@@ -1,7 +1,7 @@
 ---
 description: Generate commit message, confirm, commit and push. Auto-detects remote, branch, upstream. One approval gate.
 argument-hint: [context about the changes]
-allowed-tools: Read, Glob, Grep, Bash
+allowed-tools: Agent, Read, Glob, Grep, Bash
 ---
 
 # Commit & Push — One-Shot Commit + Push
@@ -90,6 +90,16 @@ On approval:
      - Other → report error clearly, suggest fix, wait for approval before retrying
 
 3. **Report**: "Committed and pushed to `origin/<branch>`."
+
+4. **Log**: Spawn Scribe to log activity: "Append to `.claude/transformers/activity.log`: `YYYY-MM-DD HH:MM commit-and-push [commit message summary] [files committed count]`"
+
+5. **Remember**: If push failed and you had to fix it (pull --rebase, upstream setup, auth issue), spawn Scribe to save the learning:
+   - "Add to `.claude/transformers/memory/long-term/git-workflow.md`: [what happened and the fix]. Update index.md."
+   - This ensures the same mistake doesn't happen next time.
+
+## Memory Check
+
+Before starting, read `.claude/transformers/memory/long-term/index.md` if it exists. Check `git-workflow` for learnings about this project's git workflow — apply them (e.g., pull before push, upstream conventions).
 
 ## Rules
 

@@ -1,7 +1,7 @@
 ---
 description: Generate commit messages for staged changes. Reviews staged files, generates message, asks to push.
 argument-hint: [context about the changes]
-allowed-tools: Read, Glob, Grep, Bash
+allowed-tools: Agent, Read, Glob, Grep, Bash
 ---
 
 # Commit Generator — Smart Commit Messages
@@ -60,6 +60,8 @@ If the commit fails (pre-commit hook, etc.):
 - Stage the fix
 - Create a NEW commit (never amend)
 
+After successful commit, spawn Scribe to log: "Append to `.claude/transformers/activity.log`: `YYYY-MM-DD HH:MM commit-generator [commit message summary] [files committed count]`"
+
 ## Phase 3: Push
 
 After successful commit, ask:
@@ -73,6 +75,11 @@ If push fails (no upstream, rejected, etc.):
 - Report the error clearly
 - Suggest the fix
 - Wait for approval before retrying
+- After fixing, spawn Scribe to save the learning: "Add to `.claude/transformers/memory/long-term/git-workflow.md`: [what happened and the fix]. Update index.md."
+
+## Memory Check
+
+Before starting, read `.claude/transformers/memory/long-term/index.md` if it exists. Apply relevant git workflow learnings for this project.
 
 ## Rules
 

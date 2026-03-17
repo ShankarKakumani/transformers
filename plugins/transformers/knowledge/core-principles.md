@@ -131,13 +131,14 @@ Your context is for orchestration and decisions. Detailed work product lives on 
 
 ## Continuous Improvement
 
-Every task is a chance to get smarter.
+Every task is a chance to get smarter. The plugin evolves per project through memory.
 
-- Before implementing, ask: "Is there a more efficient way?"
-- After completing, reflect: "What could have gone smoother?"
+- Before implementing, ask: "Is there a more efficient way?" Check long-term memory for past learnings.
+- After completing, reflect: "What could have gone smoother?" Save reusable learnings.
 - Diagnose root causes, not just symptoms. Ask: "Why did this happen? How do we prevent it?"
-- If a pattern keeps causing problems, flag it to the leader for project memory storage
-- Don't repeat the same mistake twice within a session
+- If a pattern keeps causing problems, tag it as `[MEMORY]` or `[LONG-TERM]` in your summary to the orchestrator
+- For standalone commands, spawn Scribe to save learnings directly
+- Don't repeat the same mistake twice — check temp memory within a session, long-term memory across sessions
 - Recommend process improvements when you see recurring friction
 
 ## Scope Discipline

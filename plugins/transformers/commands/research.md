@@ -62,6 +62,10 @@ Collect all agent findings and present as a unified report:
 ### Recommendations
 [If the user asked for advice, give options with tradeoffs]
 
+## Phase 4: Save Learnings
+
+If the research uncovered non-obvious gotchas or patterns, spawn Scribe to save them to long-term memory. Only save what would help future agents — skip anything obvious or already documented.
+
 ## Rules
 
 - No code changes. Research only.
