@@ -2,7 +2,6 @@
 description: Generate commit message, confirm, commit and push. Auto-detects remote, branch, upstream. One approval gate.
 argument-hint: [context about the changes]
 allowed-tools: Read, Glob, Grep, Bash
-model: sonnet
 ---
 
 # Commit & Push — One-Shot Commit + Push
