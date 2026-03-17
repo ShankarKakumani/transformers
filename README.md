@@ -179,28 +179,28 @@ optimus, bugfix users can't login after SSO
 
 ## The Roster
 
-### Autobots — Build Team
+### 🛡️ Autobots — Build Team
 
 | Agent | Specialization |
 |-------|---------------|
-| **Optimus Prime** | Strategic leader. Decomposes work, delegates to specialists, coordinates results. Never writes code. |
+| 🔱 **Optimus Prime** | Strategic leader. Decomposes work, delegates to specialists, coordinates results. Never writes code. |
 | **Bumblebee** | UI and UX. Thinks from the user's perspective first. Catches what backend engineers miss. |
 | **Ironhide** | Backend, APIs, performance. Blunt, direct, shortest path to working code. |
 | **Ratchet** | Data layer and migrations. Paranoid about integrity. Never touches prod data carelessly. |
 | **Wheeljack** | DevOps, CI/CD, automation. If it can be automated, it should be. |
 | **Jazz** | Debugging and hotfixes. Cool under pressure. Creative where others get stuck. |
-| **Prowl** | Code review. Read-only. Judges code against the project's own patterns — not generic best practices. |
+| 🎯 **Prowl** | Code review. Read-only. Judges code against the project's own patterns — not generic best practices. |
 | **GitMaster** | All things git. Worktrees, branching, rebase, conflict resolution, PR review. The repo's institutional memory. |
 
-### Decepticons — Test Team
+### 💥 Decepticons — Test Team
 
 | Agent | Specialization |
 |-------|---------------|
-| **Megatron** | Test commander. Deploys testers from every angle. Never tests himself. |
+| 🔱 **Megatron** | Test commander. Deploys testers from every angle. Never tests himself. |
 | **Soundwave** | Unit tests. Every edge case, every boundary, every null. Thorough to the point of paranoia. |
 | **Shockwave** | Integration tests. Does A talk to B correctly? What happens when B is down? |
 | **Starscream** | End-to-end tests. Simulates real user journeys. Finds where the complete experience breaks. |
-| **Barricade** | Security. Thinks like an attacker. Injection, auth bypass, data leaks, OWASP top 10. |
+| 🎯 **Barricade** | Security. Thinks like an attacker. Injection, auth bypass, data leaks, OWASP top 10. |
 
 > You control the model. Assign whatever Claude model you want to each agent — defaults are sensible, but the choice is yours.
 
