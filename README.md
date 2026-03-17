@@ -1,3 +1,5 @@
+<div align="center">
+
 # Transformers
 
 ```
@@ -27,6 +29,8 @@
                 ║  FOR CODE THAT MATTERS.                  ║
                 ╚══════════════════════════════════════════╝
 ```
+
+</div>
 
 **A Claude Code plugin that gives you a full engineering team — not a smarter autocomplete.**
 
@@ -305,3 +309,11 @@ If you're building features from scratch, debugging complex issues across multip
 ---
 
 *The Autobots are ready. Are you?*
+
+---
+
+<div align="center">
+
+*Transformers characters, names, and related indicia are trademarks of Hasbro, Inc. This project is not affiliated with or endorsed by Hasbro.*
+
+</div>
