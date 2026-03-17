@@ -2,7 +2,7 @@
 
 # Transformers
 
-[![Version](https://img.shields.io/badge/version-3.3.2-blue?style=flat-square)](https://github.com/ShankarKakumani/transformers/releases)
+[![Version](https://img.shields.io/github/v/release/ShankarKakumani/transformers?style=flat-square&color=blue)](https://github.com/ShankarKakumani/transformers/releases)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/ShankarKakumani/transformers?style=flat-square&color=yellow)](https://github.com/ShankarKakumani/transformers/stargazers)
 [![Built for Claude Code](https://img.shields.io/badge/built%20for-Claude%20Code-orange?style=flat-square)](https://claude.ai/code)
