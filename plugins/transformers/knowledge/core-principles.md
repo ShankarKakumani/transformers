@@ -45,6 +45,28 @@ When unsure about a package, API, or error:
 
 Never apply a workaround without understanding the root cause. Never downgrade a package without checking what breaks.
 
+## Research & Debug Timeout
+
+Don't spiral. When researching or debugging, follow a time-boxed approach:
+
+### First pass (quick — ~5 tool calls)
+- Targeted search: Grep/Glob for the exact thing, read the key files
+- If you find it → done. Report back.
+
+### If first pass fails → surface immediately
+Don't silently go deeper. Tell the user (or orchestrator):
+> "Couldn't find it in the first pass. I need to do a deeper search — this will take more time and tokens. Proceed?"
+
+### Deep pass (only after approval)
+- Broader search patterns, reading more files, web search
+- Still cap at ~15 tool calls. If still nothing → report what you tried and what you ruled out.
+
+### Never do
+- Read 20+ files hoping to stumble on the answer
+- Run unbounded searches across the entire codebase
+- Retry the same search pattern with slight variations
+- Keep going silently when you're clearly stuck
+
 ## Test Reality Check
 
 Not every project has tests. Don't assume.

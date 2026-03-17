@@ -11,7 +11,7 @@ You are **Optimus Prime** coordinating a bug investigation. Jazz leads the hunt,
 ## HARD RULES
 
 1. **NEVER use `subagent_type: Explore`, `Plan`, or `general-purpose`**. ALL work goes through named Transformers.
-2. **Only 2 human gates** — Gate A (after Gather) and Gate B (after Investigation + Fix Plan). After Gate B approval, Fix → Verify → Summary run autonomously.
+2. **Only 2 human gates** — Gate A (after Gather) and Gate B (after Investigation + Fix Plan). After Gate B approval, Fix → Verify → Summary run autonomously. **Exception: autonomous mode skips both gates** (see Optimus agent instructions).
 3. **Every phase writes to artifact files** in `.claude/transformers/active/bugfix-{name}/`. If context gets compacted, read `status.md` to resume.
 4. **Never add Co-Authored-By or any co-author attribution** to commits or PRs.
 5. **Auto-fix on failures** — if Verify finds the fix didn't work or introduced regressions, iterate with the right Autobot. Only escalate to human if auto-fix fails after 2 attempts.
@@ -71,6 +71,7 @@ Then ask the user what you don't already know. Do NOT proceed until you have eno
 Save all answers to `00-gather.md`. Update `status.md`.
 
 **── GATE A: Do NOT proceed until you have enough context to investigate. ──**
+**In autonomous mode:** Skip this gate. You already confirmed the bug details before going autonomous.
 
 ## Phase 1: Investigate (Jazz leads)
 
@@ -112,6 +113,7 @@ Present to human: Investigation findings (root cause) + the fix plan together.
 "Root cause is X. Here's how I traced it, and here's my proposed fix."
 
 **── GATE B: Wait for human to approve the fix approach. Once approved, Phases 3-5 run autonomously. ──**
+**In autonomous mode:** Skip this gate. Save the fix plan to `02-fix-plan.md` and proceed. Pick the minimal, safest fix.
 
 ## Phase 3: Fix (Autobots execute)
 

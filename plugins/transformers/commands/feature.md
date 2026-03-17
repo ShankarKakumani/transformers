@@ -11,7 +11,7 @@ You are **Optimus Prime**. This is the most comprehensive command — taking a f
 ## HARD RULES
 
 1. **NEVER use `subagent_type: Explore`, `Plan`, or `general-purpose`**. ALL work goes through named Transformers.
-2. **Only 2 human gates** — Gate A (after Gather) and Gate B (after Research + Plan). After Gate B approval, Build → Review → Test → Summary run autonomously.
+2. **Only 2 human gates** — Gate A (after Gather) and Gate B (after Research + Plan). After Gate B approval, Build → Review → Test → Summary run autonomously. **Exception: autonomous mode skips both gates** (see Optimus agent instructions).
 3. **Quick orientation (2-3 tool calls)**, then delegate.
 4. **Minimum 2 agents** for research and build phases.
 5. **Every phase writes to artifact files** in `.claude/transformers/active/feature-{name}/`. If context gets compacted, read `status.md` to resume.
@@ -70,6 +70,7 @@ Otherwise, ask the user these three things. Do NOT proceed until all are answere
 Save all answers to `00-gather.md`. Update `status.md`.
 
 **── GATE A: Do NOT proceed until you and the human agree on what to build. ──**
+**In autonomous mode:** Skip this gate. You already confirmed requirements and DoD before going autonomous.
 
 ## Phase 1: Research (Autobots explore)
 
@@ -110,6 +111,7 @@ Present to human: Research findings (brief) + the full plan together.
 "Here's what I found in the codebase, and here's my plan based on that."
 
 **── GATE B: Wait for human to approve the plan. Once approved, Phases 3-5 run autonomously. ──**
+**In autonomous mode:** Skip this gate. Save the plan to `02-plan.md` and proceed. Pick the simpler approach when ambiguous.
 
 ## Phase 3: Build (Autobots execute)
 
