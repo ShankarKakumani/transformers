@@ -81,25 +81,25 @@ On approval:
      - Create a NEW commit (never amend)
      - Show the user what was fixed
 
-2. **Push** (immediately after successful commit):
-   - Has upstream → `git push`
-   - No upstream → `git push -u origin <branch>`
-   - If push fails:
-     - Behind remote → `git pull --rebase` then retry push, report what happened
-     - Auth failure → report and suggest fix
-     - Other → report error clearly, suggest fix, wait for approval before retrying
+2. **Push** — delegate to GitMaster:
+   Spawn `gitmaster` with:
+   > "Push the current branch. Branch: `<branch>`. Upstream status: `<from Phase 0 detection>`. Platform: `<github/gitlab/etc>`. Apply any known push patterns from memory. Handle hook detection, upstream setup, and any push failures. Return a 1-line result."
+
+   GitMaster handles:
+   - Hook detection before push
+   - Upstream setup if missing (`git push -u origin <branch>`)
+   - Pull --rebase if behind remote
+   - Auth failure diagnosis
+   - Tag detection if this commit is tagged
+   - Writing push patterns to memory
 
 3. **Report**: "Committed and pushed to `origin/<branch>`."
 
 4. **Log**: Spawn Scribe to log activity: "Append to `.claude/transformers/activity.log`: `YYYY-MM-DD HH:MM commit-and-push [commit message summary] [files committed count]`"
 
-5. **Remember**: If push failed and you had to fix it (pull --rebase, upstream setup, auth issue), spawn Scribe to save the learning:
-   - "Add to `.claude/transformers/memory/long-term/git-workflow.md`: [what happened and the fix]. Update index.md."
-   - This ensures the same mistake doesn't happen next time.
-
 ## Memory Check
 
-Before starting, read `.claude/transformers/memory/long-term/index.md` if it exists. Check `git-workflow` for learnings about this project's git workflow — apply them (e.g., pull before push, upstream conventions).
+Before starting, read `.claude/transformers/memory/long-term/index.md` if it exists. Check `git-workflow` for learnings about this project's git workflow — pass them to GitMaster in the push delegation so it starts informed.
 
 ## Rules
 
