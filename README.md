@@ -179,7 +179,7 @@ optimus, bugfix users can't login after SSO
 
 ## The Roster
 
-### 🛡️ Autobots — Build Team
+### Autobots — Build Team
 
 | Agent | Specialization |
 |-------|---------------|
@@ -192,7 +192,7 @@ optimus, bugfix users can't login after SSO
 | **Prowl** | Code review. Read-only. Judges code against the project's own patterns — not generic best practices. |
 | **GitMaster** | All things git. Worktrees, branching, rebase, conflict resolution, PR review. The repo's institutional memory. |
 
-### 💥 Decepticons — Test Team
+### Decepticons — Test Team
 
 | Agent | Specialization |
 |-------|---------------|
