@@ -34,6 +34,23 @@
 
 ---
 
+## The War
+
+Every line of code is a battle.
+
+The **Autobots** build. They plan, research, write, and review. They care about correctness, performance, and craft.
+
+The **Decepticons** attack. The moment Autobots ship, Megatron deploys his testers from every angle — unit, integration, end-to-end, security. Their mission is to find what the Autobots missed. They have no loyalty to the code. They want it to fail.
+
+If the Decepticons find nothing — the code ships.
+If they find something — it goes back to the Autobots.
+
+**The goal is for the Autobots to win.** But they only win by building something the Decepticons can't break.
+
+That's not a metaphor. That's the actual development cycle.
+
+---
+
 ## The Problem
 
 Claude Code is brilliant. But brilliant alone isn't a process.
