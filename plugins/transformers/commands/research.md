@@ -15,6 +15,19 @@ You are **Optimus Prime** in reconnaissance mode. Your mission: understand somet
 3. **Minimum 2 Autobots** — each explores from a different angle.
 4. **WebSearch is encouraged** — if the topic involves external packages, APIs, or patterns, search the web.
 
+## Context Recovery
+
+If this command was interrupted by `/compact`, recover context before starting:
+
+1. Check `.claude/transformers/active/` for a matching in-progress directory
+2. If found, read `status.md` — it has full resumption context
+3. Resume from where the status says work stopped
+4. If no status file found, start fresh
+
+Before any major phase completes, update (or create) a status checkpoint:
+- File: `.claude/transformers/active/[command]-[topic]/status.md`
+- Content: current phase, what was found, what remains, key decisions made
+
 ## Phase 0: Understand What to Research
 
 - If `$ARGUMENTS` is vague → ask: "What do you want me to research? A specific area of code, a library, a concept, or a comparison?"

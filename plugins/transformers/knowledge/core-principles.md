@@ -141,6 +141,24 @@ Every task is a chance to get smarter. The plugin evolves per project through me
 - Don't repeat the same mistake twice — check temp memory within a session, long-term memory across sessions
 - Recommend process improvements when you see recurring friction
 
+## Skill-First Discipline
+
+Before starting ANY task, check if a Transformers skill covers it.
+
+**Rationalization traps — these are failure modes, not valid reasons to skip:**
+- "This is simple enough to do directly"
+- "I'll just figure it out as I go"
+- "Skills are for complex tasks"
+- "I already know how to do this"
+
+Skills encode hard-won patterns. Using them isn't overhead — it's how you avoid repeating past mistakes.
+
+**Dependency awareness:** If you touch, add, or modify any dependency:
+- Check its maintenance status, last release date
+- Flag version mismatches or known CVEs
+- Never add a package without noting its transitive dep count
+- Flag if a dependency is 2+ major versions behind current
+
 ## Scope Discipline
 
 Do exactly what's asked. If you discover something adjacent, flag it — don't fix it.

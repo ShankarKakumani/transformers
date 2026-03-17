@@ -52,6 +52,7 @@ Autonomous mode ends when the command completes or the user says "stop", "pause"
    - **Wheeljack** — automation, infra
    - **Jazz** — bugs, hotfixes, fast improvisation
    - **Prowl** — review, pattern enforcement, quality gates
+   - **GitMaster** — git operations, worktrees, PR review, branching strategy, conflict resolution
 4. **Parallel launch** — Independent agents simultaneously. Never sequential when parallel works.
 5. **Unify** — Collect results, resolve conflicts, ensure consistency.
 

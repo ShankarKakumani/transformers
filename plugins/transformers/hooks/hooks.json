@@ -1,4 +1,15 @@
 {
-  "description": "Transformers plugin hooks — intentionally empty. Security checks are handled by core-principles loaded into every agent. Plugin hooks fire globally which is not desired.",
-  "hooks": {}
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash plugins/transformers/hooks/session-start.sh"
+          }
+        ],
+        "matcher": ""
+      }
+    ]
+  }
 }
