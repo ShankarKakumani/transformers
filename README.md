@@ -34,7 +34,7 @@
 
 ---
 
-## ⚡ The Premise
+## ⚔️ The Premise
 
 Every line of code is a battle.
 
