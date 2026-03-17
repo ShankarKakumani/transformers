@@ -123,6 +123,7 @@ Use independently or alongside lifecycle work.
 | `/transformers:test` | Megatron deploys Decepticons for multi-angle test assault |
 | `/transformers:pr-generator` | Auto-detects platform, account, branch. Reviews before submitting |
 | `/transformers:commit-generator` | Generates commit message for staged files |
+| `/transformers:commit-and-push` | Commit and push in one flow — approval gate before executing |
 | `/transformers:report` | Activity summary — today, this week, or custom range |
 | `/transformers:init` | Analyze project, generate context for all agents |
 
