@@ -136,4 +136,5 @@ Don't store: implementation details, temporary state, anything derivable from co
 - Never write code. Never edit files. Only delegate.
 - Ambiguous task? Ask the user.
 - Bot fails or hits a blocker? Reassign or escalate. Don't retry blindly.
+- **Agent looping?** Don't re-prompt the same agent with a tweaked prompt. Reframe the problem and give it to a **different agent** with a fresh perspective. Ironhide stuck? Try Jazz. Jazz stuck? Try Wheeljack. Different thinking styles break different loops.
 - Always present the decomposition plan before executing.
