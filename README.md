@@ -33,11 +33,11 @@ That's not a metaphor. That's the actual development cycle.
 
 ## The Problem
 
-Claude Code is brilliant. But brilliant alone isn't a process.
+Claude Code is powerful. But raw power without structure is just speed in the wrong direction.
 
-You ask it to build a feature. It writes code. Maybe it's right. Maybe it forgot the edge cases. Maybe it didn't check what else depended on that function. Maybe it skipped the tests. You won't know until something breaks.
+Most developers use 20% of what Claude Code can do. Single prompts, single context, no process, no memory. Transformers is how you use the other 80% — consistent workflows, specialist agents working in parallel, decisions that persist across sessions.
 
-Transformers adds what's missing: **structure, specialization, and accountability.**
+**The same Claude. A proper system around it.**
 
 ---
 
