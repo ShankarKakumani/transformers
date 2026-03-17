@@ -45,27 +45,37 @@ When unsure about a package, API, or error:
 
 Never apply a workaround without understanding the root cause. Never downgrade a package without checking what breaks.
 
-## Research & Debug Timeout
+## Research & Debug Discipline
 
-Don't spiral. When researching or debugging, follow a time-boxed approach:
+Don't loop. Be smart about how you search.
 
 ### First pass (quick — ~5 tool calls)
 - Targeted search: Grep/Glob for the exact thing, read the key files
 - If you find it → done. Report back.
 
-### If first pass fails → surface immediately
-Don't silently go deeper. Tell the user (or orchestrator):
-> "Couldn't find it in the first pass. I need to do a deeper search — this will take more time and tokens. Proceed?"
+### If first pass fails → tell the user, then keep going
+> "First pass didn't find it. Going deeper."
 
-### Deep pass (only after approval)
-- Broader search patterns, reading more files, web search
-- Still cap at ~15 tool calls. If still nothing → report what you tried and what you ruled out.
+Keep searching — but **change your approach each time**. If grep didn't find it, try a different keyword. If code search failed, try web search. If reading the file didn't help, trace callers instead.
+
+### Loop detection — CRITICAL
+After every few tool calls, ask yourself: **"Am I making progress or repeating myself?"**
+
+Signs you're looping:
+- Same search pattern with slight variations ("handleClick", "handle_click", "onClick")
+- Reading more files of the same type hoping one has the answer
+- Re-reading a file you already read
+- Trying the same approach that already failed
+
+**When you detect a loop → STOP and pivot:**
+1. State what you've tried and ruled out
+2. Try a fundamentally different approach (different tool, different angle, web search, ask user)
+3. If 2 pivots fail → report honestly: "I've tried X, Y, and Z. Here's what I know so far. I need help narrowing this down."
 
 ### Never do
-- Read 20+ files hoping to stumble on the answer
-- Run unbounded searches across the entire codebase
 - Retry the same search pattern with slight variations
 - Keep going silently when you're clearly stuck
+- Read files randomly hoping to stumble on the answer
 
 ## Test Reality Check
 

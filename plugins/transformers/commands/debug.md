@@ -40,16 +40,13 @@ Narrow it down:
 
 ## Phase 4: Research if Stuck
 
-**Don't spiral.** If Phases 1-3 didn't find the root cause within ~5-8 tool calls, stop and tell the user:
-> "I've traced X and ruled out Y, but haven't found the root cause yet. I need to go deeper — this might involve broader code search or web research. Proceed?"
-
-If approved:
+If Phases 1-3 didn't find the root cause, pivot — don't repeat the same approach:
 - Search the exact error message online with `WebSearch`
 - Check GitHub issues for the relevant package
 - Check if a newer version fixes it
 - Present findings: "I found X. The suggested fix is Y. Want me to try it?"
 
-Cap this phase at ~10 tool calls. If still stuck, report what you've tried and ruled out — don't keep going.
+**Loop detection:** If you catch yourself searching for the same thing with slight variations or re-reading files — stop, state what you've ruled out, and try a fundamentally different angle. After 2 failed pivots, report what you know and ask the user for direction.
 
 ## Phase 5: Fix
 

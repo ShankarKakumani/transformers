@@ -69,7 +69,7 @@ Collect all agent findings and present as a unified report:
 - Be specific — file:line references, not vague descriptions
 - If you can't find something, say so. Don't guess.
 - If web research would help, use it
-- **Timeout discipline** — each research agent gets ~5 tool calls for the first pass. If they can't find what they need, they surface immediately with what they tried. You then decide: go deeper (approve a second pass) or report partial findings to the user. Never let agents spiral silently.
+- **Anti-loop discipline** — if a research agent is repeating similar searches or reading files without making progress, it must pivot approach or surface what it has. Keep going as long as progress is being made, but never loop.
 
 ## Topic
 
