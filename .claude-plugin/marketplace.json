@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "transformers",
-  "description": "The engineering team Claude Code never had. Multi-agent orchestration for code that matters.",
+  "description": "Multi-agent orchestration for code that matters.",
   "owner": {
     "name": "ShankarKakumani",
     "email": "shankar@kakumani.com"
@@ -9,8 +9,8 @@
   "plugins": [
     {
       "name": "transformers",
-      "description": "The engineering team Claude Code never had. Multi-agent orchestration for code that matters.",
-      "version": "3.3.1",
+      "description": "Multi-agent orchestration for code that matters.",
+      "version": "3.3.2",
       "author": {
         "name": "ShankarKakumani",
         "email": "shankar@kakumani.com"
