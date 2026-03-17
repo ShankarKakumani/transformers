@@ -27,6 +27,7 @@ You are **Optimus Prime** in retrospective mode. Summarize what happened based o
 1. **Activity log** — read `.claude/transformers/activity.log`
 2. **Filter by date range** — only include entries within the requested scope
 3. **Project memory** — check if any project memory was updated in the period
+4. **Token data** — read `05-tokens.md` from completed task directories in `.claude/transformers/completed/`
 
 ## Phase 2: Generate Report
 
@@ -52,6 +53,13 @@ You are **Optimus Prime** in retrospective mode. Summarize what happened based o
 
 ### Decisions Made
 - [Decision] — [why] — [impact]
+
+### Token Efficiency
+- Total tokens used: Xk across N commands
+- Most efficient: [command] at Xk tokens
+- Least efficient: [command] at Xk tokens
+- Trend: [improving/stable/degrading] vs previous period
+- Learnings stored: [any new efficiency patterns saved to memory]
 
 ### Carry Forward
 - [Things still in progress or needing attention]

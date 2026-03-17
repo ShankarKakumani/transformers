@@ -83,6 +83,9 @@ Quick orientation (2-3 tool calls), then spawn Autobots to understand the existi
 - Are there dependencies or constraints?
 - Review any resources the user provided in Phase 0
 
+**IMPORTANT: Sub-agent result discipline.** When spawning research agents, instruct each:
+> "Write all detailed findings to `01-research.md` (append your section). Return to me ONLY a 1-3 line summary."
+
 Save findings to `01-research.md`. Update `status.md`.
 
 **Proceed directly to Phase 2 — do NOT wait for approval.**
@@ -120,6 +123,12 @@ Launch Autobots per the approved plan:
 - `jazz` — integration/glue work
 
 Parallel where possible. Collect results. Resolve conflicts.
+
+**IMPORTANT: Sub-agent result discipline.** When spawning builders, instruct each:
+> "Write what you built (files changed, decisions made) to `03-build-log.md` (append your section). Return to me ONLY a 1-3 line summary of what you built and any blockers."
+
+**Context checkpoint after build:** If context is getting heavy (many sub-agent rounds completed), update `status.md` and tell the user:
+> "Build complete. All progress saved to artifact files. Run `/compact` — I'll resume with review phase from a clean context."
 
 Save what was built to `03-build-log.md` (files changed, decisions made). Update `status.md`.
 
@@ -161,6 +170,20 @@ Present the **complete picture** to the human:
 - Any unresolved issues that need human input
 - Suggest next steps if any
 
+### Token Report
+Write `05-tokens.md` with the full token breakdown (see Optimus agent instructions for format).
+Present a summary to the user:
+```
+Token usage: ~Xk total across N agents
+Heaviest: [agent] at Yk (Phase: [phase])
+```
+Compare against past runs in `.claude/transformers/completed/` — note if this was more/less efficient and why.
+
+### Self-improvement
+Analyze the token data. If any agent was wasteful:
+- Store the pattern in project memory so future runs are smarter
+- Example: "ironhide used 40k tokens on research for a simple UI feature — next time, skip ironhide for frontend-only work"
+
 Store reusable patterns to project memory.
 Move artifact directory from `active/` to `completed/`.
 Update `status.md` with `phase: done`.
@@ -168,7 +191,7 @@ Update `status.md` with `phase: done`.
 ### Activity Log
 Spawn `scribe` to append an entry to `.claude/transformers/activity.log`:
 ```
-YYYY-MM-DD HH:MM [feature] Built {feature-name}: {one-line summary} [{N} files changed]
+YYYY-MM-DD HH:MM [feature] Built {feature-name}: {one-line summary} [{N} files changed] [Xk tokens, N agents]
 ```
 
 ## Rules

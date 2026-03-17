@@ -88,6 +88,9 @@ If the bug spans multiple layers, bring in reinforcements in parallel:
 
 If stuck, use `WebSearch` to research the error message or known issues.
 
+**Sub-agent result discipline:** Instruct each investigator:
+> "Write detailed findings to `01-investigation.md` (append your section). Return to me ONLY a 1-3 line summary: what you found and whether you identified the root cause."
+
 Save findings to `01-investigation.md`. Update `status.md`.
 
 **Proceed directly to Phase 2 — do NOT wait for approval.**
@@ -119,6 +122,9 @@ Spawn the right Autobot(s) based on the fix plan:
 - `ironhide` — backend/logic fixes
 - `ratchet` — data layer fixes
 - `bumblebee` — UI fixes
+
+**Sub-agent result discipline:** Instruct each fixer:
+> "Write what you changed to `03-fix-log.md` (append your section). Return to me ONLY a 1-3 line summary and any blockers."
 
 Save what was changed to `03-fix-log.md` (files, lines, what and why). Update `status.md`.
 
@@ -159,6 +165,17 @@ Present the **complete picture** to the human:
 - Any issues that were auto-fixed (and what was done)
 - Any unresolved issues that need human input
 
+### Token Report
+Write `05-tokens.md` with the full token breakdown (see Optimus agent instructions for format).
+Present a summary to the user:
+```
+Token usage: ~Xk total across N agents
+Heaviest: [agent] at Yk (Phase: [phase])
+```
+
+### Self-improvement
+Analyze token data. Store wasteful patterns in project memory so future bugfixes are leaner.
+
 Store patterns to project memory (common failure modes, fragile areas).
 Move artifact directory from `active/` to `completed/`.
 Update `status.md` with `phase: done`.
@@ -166,7 +183,7 @@ Update `status.md` with `phase: done`.
 ### Activity Log
 Spawn `scribe` to append an entry to `.claude/transformers/activity.log`:
 ```
-YYYY-MM-DD HH:MM [bugfix] Fixed {bug-name}: {root cause} → {fix summary} [{N} files changed]
+YYYY-MM-DD HH:MM [bugfix] Fixed {bug-name}: {root cause} → {fix summary} [{N} files changed] [Xk tokens, N agents]
 ```
 
 ## Rules

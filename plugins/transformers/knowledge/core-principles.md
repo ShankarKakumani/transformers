@@ -76,13 +76,26 @@ Recognize these early and delegate to the human:
 
 Give the exact command to run and what to report back.
 
-## Context Management
+## Context Management — CRITICAL
 
-Your context window is finite. Protect it.
+Your context window is finite. If it fills up, you hallucinate and all work is wasted. Protect it aggressively.
+
+### Reading discipline
 - Prefer targeted reads (offset/limit) over reading entire large files
 - Prefer bounded searches (head_limit) over unbounded
-- If the task is getting large, checkpoint progress to artifact files before compaction forces it
-- Give the human a continuation prompt if needed: "Open a new session and paste this: [full context to resume]"
+
+### Sub-agent result discipline
+When spawning any sub-agent, ALWAYS include this instruction:
+> "Write all detailed output to the artifact file `[specific path]`. Return to me ONLY a 1-3 line summary and any decisions needing my input."
+
+Your context is for orchestration and decisions. Detailed work product lives on disk.
+
+### Context checkpointing
+- After each major phase or chunk, update `status.md` with full resumption context
+- If significant work remains after completing a phase, proactively suggest `/compact`:
+  > "Phase N complete. All progress saved. Run `/compact` — I'll resume from the artifact files with clean context."
+- After compaction, ALWAYS read `status.md` first, then relevant artifact files to reconstruct state
+- The `status.md` + artifact files ARE your memory across compactions. Write them as if a cold reader will pick them up.
 
 ## Continuous Improvement
 
