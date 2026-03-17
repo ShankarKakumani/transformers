@@ -2,7 +2,7 @@
 
 # Transformers
 
-<img src="assets/autobot.svg" width="220" alt="Autobot"/>
+<img src="assets/autobots.png" width="220" alt="Autobot"/>
 
 ### MULTI-AGENT ORCHESTRATION. FOR CODE THAT MATTERS.
 
