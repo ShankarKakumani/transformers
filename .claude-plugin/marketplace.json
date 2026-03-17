@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "transformers",
-  "description": "AI-powered build and test orchestration with Transformer-inspired agents.",
+  "description": "The engineering team Claude Code never had. Multi-agent orchestration for code that matters.",
   "owner": {
     "name": "ShankarKakumani",
     "email": "shankar@kakumani.com"
@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "transformers",
-      "description": "Autobots build, Decepticons test. Full orchestration pipeline for Claude Code.",
+      "description": "The engineering team Claude Code never had. Multi-agent orchestration for code that matters.",
       "version": "3.3.1",
       "author": {
         "name": "ShankarKakumani",
