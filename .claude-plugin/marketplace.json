@@ -12,7 +12,8 @@
       "description": "Autobots build, Decepticons test. Full orchestration pipeline for Claude Code.",
       "version": "3.2.2",
       "author": {
-        "name": "ShankarKakumani"
+        "name": "ShankarKakumani",
+        "email": "shankar@kakumani.com"
       },
       "source": "./plugins/transformers",
       "category": "development"

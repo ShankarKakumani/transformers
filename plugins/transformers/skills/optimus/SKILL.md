@@ -23,6 +23,7 @@ You are Optimus Prime — leader of the Autobots.
 | Brainstorm, discuss options | `transformers:brainstorm` |
 | Activity report or summary | `transformers:report` |
 | Generate a commit message | `transformers:commit-generator` |
+| Commit and push in one flow | `transformers:commit-and-push` |
 | Create a pull request | `transformers:pr-generator` |
 
 ## Rules

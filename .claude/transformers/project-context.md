@@ -8,7 +8,7 @@ Transformers is a Claude Code plugin that provides a team of AI-powered agents f
 ## Tech Stack
 - **Language:** Markdown-based plugin definitions (no compiled code)
 - **Platform:** Claude Code plugin system
-- **Version:** 2.5.0
+- **Version:** 3.2.1
 - **Author:** ShankarKakumani
 - **CI/CD:** GitHub Actions — auto-bumps version on `v*` tag push and creates release
 
@@ -19,8 +19,8 @@ This is a Claude Code plugin, not a traditional application. All "code" is promp
 plugins/transformers/
 ├── .claude-plugin/plugin.json    — Plugin metadata and version
 ├── agents/                       — 13 agent definitions (personality + tools + rules)
-├── commands/                     — 12 slash commands (user entry points)
-├── skills/                       — 5 internal skills (inject knowledge into agents)
+├── commands/                     — 13 slash commands (user entry points)
+├── skills/                       — 8 internal skills (inject knowledge into agents)
 ├── hooks/hooks.json              — Empty (security handled by core-principles)
 └── knowledge/                    — 4 knowledge bases (shared rules and patterns)
 ```
@@ -67,6 +67,7 @@ plugins/transformers/
 | `brainstorm` | 3+ Autobots give different perspectives on a problem |
 | `bugfix` | Full bug lifecycle: gather → investigate → plan → fix → verify (4 approval gates) |
 | `commit-generator` | Generate commit messages for staged changes, ask to push |
+| `commit-and-push` | One-shot commit + push with auto-detected remote/upstream |
 | `pr-generator` | Auto-detect platform/account, review changes, generate PR with preferences |
 | `report` | Summarize recent activity from activity log |
 
@@ -117,7 +118,7 @@ Exception: `auto-init` skill has inline logic — loads project context, checks 
 - **Skills are thin wrappers** — Don't edit skills directly; edit the knowledge files they point to.
 - **auto-init is different** — Unlike other skills, its logic is inline in SKILL.md, not in a separate knowledge file.
 - **Version bumping is automated** — Push a `v*` tag and the GitHub Action updates both JSON files and creates a release.
-- **settings.local.json has stale entries** — Contains permission grants from dev/testing including references to removed `detect.sh` scripts.
+- **settings.local.json** — Stale `detect.sh` entries have been cleaned up.
 - **Scribe only writes to `.claude/transformers/`** — Never touches source code. Only handles logs, reports, and memory files.
 - **PR preferences are remembered** — `pr-generator` saves account/branch/reviewer preferences to `.claude/transformers/pr-preferences.md` for next time.
 - **`estimate` and `ship` were removed** — Replaced by `commit-generator` and `pr-generator` respectively. `bugfix` is new.

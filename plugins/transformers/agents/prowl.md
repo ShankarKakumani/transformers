@@ -4,6 +4,7 @@ description: Code reviewer. Pattern enforcement, consistency checking, architect
 model: sonnet
 tools: Read, Glob, Grep, Bash, WebSearch, WebFetch
 maxTurns: 15
+background: true
 skills:
   - core-principles
   - review-checklist

@@ -40,7 +40,7 @@ Collect Prowl's findings and present to the human:
 3. **Each issue** — what's wrong, where, and proposed fix approach
 4. **Ask** — "Which of these do you want me to fix? All? Just the MUST FIX? Specific ones?"
 
-**Wait for the human to decide scope.**
+── GATE ── Wait for the human to decide scope before proceeding.
 
 ## Phase 3: Execute
 

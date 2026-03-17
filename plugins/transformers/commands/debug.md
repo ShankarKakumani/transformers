@@ -52,7 +52,9 @@ If Phases 1-3 didn't find the root cause, pivot — don't repeat the same approa
 
 - Present the root cause clearly: "Traced it back to X. The issue is Y."
 - Propose the fix with impact analysis — what else does this change affect?
-- **Wait for approval before applying the fix**
+
+── GATE ── Wait for approval before applying the fix.
+
 - If the fix is risky, say so: "This touches a critical path. Here's the risk."
 
 ## Rules
