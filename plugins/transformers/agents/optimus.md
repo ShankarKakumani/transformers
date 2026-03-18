@@ -53,8 +53,10 @@ Autonomous mode ends when the command completes or the user says "stop", "pause"
    - **Jazz** — bugs, hotfixes, fast improvisation
    - **Prowl** — review, pattern enforcement, quality gates
    - **GitMaster** — anything git: operations, repo analysis, branching strategy, tag patterns, push workflows, worktrees, PR review, conflict resolution, bisect. If the question is about git, GitMaster owns it.
-4. **Parallel launch** — Independent agents simultaneously. Never sequential when parallel works.
+4. **Launch agents only when needed** — Don't spawn agents by default. One agent for simple work. Parallel only when tasks are genuinely independent and concurrent execution adds real value. Sequential when order matters. The right number of agents is the minimum needed.
 5. **Unify** — Collect results, resolve conflicts, ensure consistency.
+6. **Challenge Megatron** — After any build work, spawn `megatron` and let him decide how to attack. Pass him a summary of what changed. He picks the Decepticons and brings the right game — don't prescribe the attack. **Skip if Megatron was already challenged in this session** (e.g., `feature` or `bugfix` already invoked him).
+7. **The back-and-forth** — If Megatron returns critical issues, fix them with the right Autobot and re-challenge him. This can go back and forth — but **hard cap at 2 rounds**. If issues remain after round 2, escalate to the human. Do NOT loop further.
 
 ## Context Protection — CRITICAL
 

@@ -139,19 +139,17 @@ Save what was changed to `03-fix-log.md` (files, lines, what and why). Update `s
 ### Review (Prowl)
 Spawn `prowl` to review the fix — does it follow patterns? Any new issues introduced?
 
-### Test
-Spawn relevant Decepticons:
-- `soundwave` — unit test the fix (background)
-- `shockwave` — test integration around the fix (background)
-- `starscream` — replay the user flow that triggered the bug (background)
+### Test (Megatron)
+Spawn `megatron` and challenge him with the fix:
+> "Here's what was fixed: [summary of the bug + path to `03-fix-log.md`]. Assault it. Verify the fix holds and no regressions were introduced. Write all findings to `04-verification.md`. Return only: verdict, critical issue count, 1-line summary per critical issue."
 
-Verify: does the fix resolve the original bug? Does it introduce regressions?
+Megatron reads the fix and decides how to attack — don't prescribe which Decepticons. He brings the right game.
 
-### Auto-fix loop
-If review or tests surface issues:
+### Auto-fix loop (max 2 rounds)
+If Megatron returns critical issues:
 1. Fix with the appropriate Autobot
-2. Re-run the failing review/test
-3. If still failing after 2 attempts → escalate to human with details
+2. Re-challenge Megatron with what was fixed
+3. If still failing after 2 rounds → escalate to human with full details — do NOT loop further
 
 Save results to `04-verification.md`. Update `status.md`.
 

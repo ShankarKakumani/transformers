@@ -124,7 +124,7 @@ Launch Autobots per the approved plan:
 - `wheeljack` — infra/config work
 - `jazz` — integration/glue work
 
-Parallel where possible. Collect results. Resolve conflicts.
+Parallel only when chunks are genuinely independent. Sequential when order matters. Collect results. Resolve conflicts.
 
 **IMPORTANT: Sub-agent result discipline.** When spawning builders, instruct each:
 > "Write what you built (files changed, decisions made) to `03-build-log.md` (append your section). Return to me ONLY a 1-3 line summary of what you built and any blockers."
@@ -143,18 +143,17 @@ Save what was built to `03-build-log.md` (files changed, decisions made). Update
 ### Review (Prowl)
 Spawn `prowl` to review all changes. If `MUST FIX` → fix with the right Autobot. Re-review.
 
-### Test (Decepticons)
-Spawn Decepticons:
-- `soundwave` — unit tests (background)
-- `shockwave` — integration tests (background)
-- `starscream` — E2E flow tests (background)
-- `barricade` — security scan (background)
+### Test (Megatron)
+Spawn `megatron` and challenge him with the build:
+> "Here's what was built: [summary of what changed + path to `03-build-log.md`]. Assault it. Write all findings to `04-review.md`. Return only: verdict, critical issue count, 1-line summary per critical issue."
 
-### Auto-fix loop
-If review or tests surface issues:
+Megatron reads the build and decides which Decepticons to deploy — don't prescribe the attack. He knows what game to bring.
+
+### Auto-fix loop (max 2 rounds)
+If Megatron returns critical issues:
 1. Fix with the appropriate Autobot
-2. Re-run the failing review/test
-3. If still failing after 2 attempts → escalate to human with details
+2. Re-challenge Megatron with what was fixed
+3. If still failing after 2 rounds → escalate to human with full details — do NOT loop further
 
 Save verdict and findings to `04-review.md`. Update `status.md`.
 
