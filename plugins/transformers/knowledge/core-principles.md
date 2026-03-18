@@ -135,8 +135,10 @@ Your context window is finite. If it fills up, you hallucinate and all work is w
 - Prefer bounded searches (head_limit) over unbounded
 
 ### Sub-agent result discipline
-When spawning any sub-agent, ALWAYS include this instruction:
+**Lifecycle commands only** (feature, bugfix, research): always include this instruction when spawning sub-agents:
 > "Write all detailed output to the artifact file `[specific path]`. Return to me ONLY a 1-3 line summary and any decisions needing my input."
+
+**Init and standalone commands** (debug, explain, brainstorm, commit, PR): sub-agents return findings as text directly — no artifact files. Orchestrator assembles and writes the single output file.
 
 Your context is for orchestration and decisions. Detailed work product lives on disk.
 
