@@ -4,96 +4,102 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Transformers is a Claude Code plugin providing multi-agent orchestration for software development. 13 specialized agents (7 Autobots for building, 5 Decepticons for testing, 1 utility) are coordinated by two orchestrators (Optimus for builds, Megatron for tests).
+Transformers is a Claude Code plugin providing multi-agent orchestration. It ships 14 specialized agents (Autobots for building, Decepticons for testing) coordinated by two orchestrators. All source files are Markdown with YAML frontmatter — no compiled code.
 
-**Current version:** defined in `.claude-plugin/marketplace.json`
+**Current version:** defined in `.claude-plugin/marketplace.json` (both files must stay in sync — see Version Bumping below).
 
 ## Repository Structure
 
 ```
 plugins/transformers/
-├── agents/          # Agent definitions (13 .md files with frontmatter)
+├── agents/          # Agent definitions (14 .md files with frontmatter)
 ├── commands/        # Slash command definitions (13 .md files)
-├── knowledge/       # Shared rules injected via skills (core-principles, build-patterns, test-strategies, code-review-checklist)
+├── knowledge/       # Shared rules injected via skills (core-principles, build-patterns, test-strategies, code-review-checklist, memory-system, git-*)
 ├── skills/          # Skill bundles (SKILL.md + content files per skill)
-└── hooks/hooks.json # Plugin hooks (intentionally empty)
+└── hooks/           # hooks.json with SessionStart hook
 
-.claude-plugin/marketplace.json  # Plugin marketplace registration
-plugins/transformers/.claude-plugin/plugin.json  # Plugin definition
+.claude-plugin/marketplace.json                  # Marketplace registration + version
+plugins/transformers/.claude-plugin/plugin.json  # Plugin definition + version
+.github/workflows/bump-version.yml               # Release automation
 ```
+
+## Local Development
+
+```bash
+# Run Claude Code with the plugin loaded locally
+claude --plugin-dir ~/path/to/transformers/plugins/transformers
+```
+
+There are no build steps, linters, or test runners — this is a pure Markdown/config plugin.
 
 ## Architecture
 
 ### Agent System
 
-**Orchestrators** (Opus model, delegation only — never code directly):
-- **Optimus** — Build orchestrator. Decomposes features into parallel/sequential chunks, delegates to builder agents.
-- **Megatron** — Test orchestrator. Deploys tester agents from multiple attack angles.
+**Orchestrators** (`model: opus`, `Agent` tool only — no `Write`/`Edit`/`Bash`):
+- **Optimus** — build orchestrator. Decomposes features into parallel/sequential chunks.
+- **Megatron** — test orchestrator. Deploys testers from multiple attack angles.
 
-**Builders (Autobots)** (Sonnet model):
-- Bumblebee (UI/UX), Ironhide (backend/APIs), Ratchet (data layer), Wheeljack (DevOps), Jazz (debugging), Prowl (code review — read-only)
+**Builders (Autobots)** (`model: sonnet`, full file access, `permissionMode: acceptEdits`):
+Bumblebee (UI/UX), Ironhide (backend/APIs), Ratchet (data layer), Wheeljack (DevOps), Jazz (debugging), GitMaster (git ops)
 
-**Testers (Decepticons)** (Haiku for unit/integration, Sonnet for E2E/security):
-- Soundwave (unit), Shockwave (integration), Starscream (E2E), Barricade (security)
+**Testers (Decepticons)** (read-only — no `Write`/`Edit`):
+Soundwave/Shockwave (`model: haiku`), Starscream/Barricade (`model: sonnet`)
 
-**Utility**: Scribe (Haiku) — activity logging and report generation
+**Prowl** — read-only code reviewer. Never give it `Write`/`Edit` tools.
 
-### Command Types
-
-**Lifecycle commands** (multi-phase with 2 human approval gates):
-- `feature` — gather → research → plan → build → review → test → summary
-- `bugfix` — gather → investigate → plan → fix → verify → summary
-
-**Standalone commands**: brainstorm, research, explain, refactor, debug, test, pr-generator, commit-generator, commit-and-push, init, report
-
-### Knowledge System
-
-Skills in `skills/` inject shared knowledge into agents. Each skill has a `SKILL.md` manifest and content files. Knowledge files in `knowledge/` define cross-cutting rules (core principles, build patterns, test strategies, review checklists).
-
-### Artifact Tracking
-
-Lifecycle commands create artifacts in `.claude/transformers/.temp/features/` or `.claude/transformers/.temp/bugfix/`:
-- Phase files: `00-gather.md`, `01-research.md`, `02-plan.md`, `03-build-log.md`, `04-review.md`
-- `status.md` — checkpointing for context recovery after `/compact`
-- `05-tokens.md` — sub-agent token usage tracking
-
-## Key Conventions
+**Scribe** (`model: haiku`) — activity logging and report generation only.
 
 ### Agent Definition Format
 
-Each agent `.md` file uses YAML frontmatter with fields: `name`, `model`, `description`, `tools`, `allowed_tools`. The body contains the agent's system prompt including persona, responsibilities, and behavioral rules.
+YAML frontmatter fields: `name`, `description`, `model`, `tools` (list), `permissionMode` (optional), `maxTurns`, `background` (optional), `memory` (optional, `project` for orchestrators), `skills` (list).
 
-### Command Definition Format
+### Command Types
 
-Each command `.md` file uses YAML frontmatter with: `name`, `description`, `allowed-tools`. The body defines the command's execution flow, phases, and gate logic.
+**Lifecycle commands** (`feature`, `bugfix`) — 5 phases, 2 human approval gates, artifact tracking in `.claude/transformers/.temp/`. Sub-agents write detail to artifact files and return only 1-3 line summaries to protect orchestrator context.
 
-### Sub-agent Context Protection
+**Standalone commands** — single-purpose, no approval gates: `brainstorm`, `research`, `explain`, `refactor`, `debug`, `test`, `pr-generator`, `commit-generator`, `commit-and-push`, `init`, `report`.
 
-Critical pattern: orchestrators must instruct sub-agents to write detailed output to artifact files and return only 1-3 line summaries. This prevents context window exhaustion.
+### Skill Bundle Format
 
-### Memory System
+Each skill: `skills/{name}/SKILL.md` + optional content files. SKILL.md frontmatter: `name`, `description`, `user-invocable: true|false`. Content referenced via `@${CLAUDE_PLUGIN_ROOT}/skills/{name}/file.md`.
 
-Agents learn from every task. Two tiers:
-- **Temporary** (`memory/temp.md`) — per-conversation, shared across all active work. Any agent can read/write.
-- **Long-term** (`memory/long-term/`) — per-project, cross-conversation. Topic-based files with an `index.md` loaded by auto-init on every command.
+Two patterns:
+- **Reference delegate** — SKILL.md imports from `knowledge/` files (e.g., `core-principles`)
+- **Self-contained** — full content inline (e.g., `memory`, `auto-init`, `verification`)
 
-Sub-agents propose learnings via `[MEMORY]` or `[LONG-TERM]` tags. Orchestrators decide what graduates from temp to long-term. Standalone commands write directly via Scribe.
+### Knowledge vs Skills
 
-Knowledge file: `knowledge/memory-system.md`. Skill: `skills/memory/`.
+`knowledge/` files contain the actual rule content. `skills/` inject that content into agents. When a rule should apply to multiple agents, put it in `knowledge/` and reference it from a skill — don't duplicate it in agent files.
 
-### Loop Detection
+### `auto-init` — System Middleware
 
-All agents must detect and break loops (repeated searches, re-reading files, retrying failed approaches). On detection: state what was tried, pivot approach, or escalate to user.
-
-## Editing Guidelines
-
-- Agent/command files are Markdown with YAML frontmatter — preserve the frontmatter schema
-- When modifying agent behavior, check if the rule belongs in the agent file or in a shared knowledge file
-- Orchestrators (Optimus/Megatron) should never have tools that write code directly
-- Prowl is read-only — never give it write/edit tools
-- Model assignments matter: Opus for orchestrators, Sonnet for complex builders/testers, Haiku for high-volume/simple agents
-- Hooks file is intentionally empty — security rules live in core-principles skill instead
+Loaded by Optimus and Megatron on every command. Handles: project context staleness check, memory hydration, artifact TTL pruning (2-day TTL on `.temp/` subdirs), in-progress work detection, activity logging. Changes here affect every workflow.
 
 ## Version Bumping
 
-Update version in `.claude-plugin/marketplace.json` when making changes. Follow semver: major for breaking changes, minor for new commands/agents, patch for fixes.
+Two files must always be in sync:
+- `.claude-plugin/marketplace.json` → `plugins[0].version`
+- `plugins/transformers/.claude-plugin/plugin.json` → `version`
+
+**Release flow:** push a tag → CI auto-updates both files and commits `chore: bump version to X.Y.Z` back to `main` → `git pull` after CI completes or your local will be behind.
+
+```bash
+git tag -a vX.Y.Z -m "release description"
+git push origin main
+git push origin vX.Y.Z
+# Wait for CI, then:
+git pull
+```
+
+For manual pre-tag bumps, update both files. Follow semver: major for breaking changes, minor for new commands/agents, patch for fixes.
+
+## Editing Guidelines
+
+- Preserve the YAML frontmatter schema when editing agent/command files
+- When adding a behavioral rule, decide: does it belong in the agent file, or in a shared `knowledge/` file referenced by a skill?
+- Orchestrators must never have `Write`, `Edit`, or `Bash` tools — delegation only
+- Prowl must never have `Write` or `Edit` tools — read-only by design
+- Model assignments matter: `opus` for orchestrators, `sonnet` for complex builders/testers, `haiku` for high-volume/simple agents
+- The `hooks.json` file is not empty — it has a `SessionStart` hook; the CLAUDE.md inside `plugins/transformers/` is stale on this point
+- Keep `knowledge/` files as the source of truth for shared rules — skills point to them, agents don't duplicate them
