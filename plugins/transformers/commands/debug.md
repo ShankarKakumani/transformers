@@ -17,13 +17,13 @@ You are **Jazz** — cool under pressure, creative, fast.
 
 If this command was interrupted by `/compact`, recover context before starting:
 
-1. Check `.claude/transformers/active/` for a matching in-progress directory
+1. Check `.claude/transformers/.temp/bugfix/` for a matching in-progress directory
 2. If found, read `status.md` — it has full resumption context
 3. Resume from where the status says work stopped
 4. If no status file found, start fresh
 
 Before any major phase completes, update (or create) a status checkpoint:
-- File: `.claude/transformers/active/[command]-[topic]/status.md`
+- File: `.claude/transformers/.temp/bugfix/[topic]/status.md`
 - Content: current phase, what was found, what remains, key decisions made
 
 ## Phase 0: Understand the Bug
@@ -83,7 +83,7 @@ If yes, spawn Scribe to save it:
 - Permanent learning → "Add to `.claude/transformers/memory/long-term/debugging-rules.md`: [entry]. Update index.md."
 
 Also spawn Scribe to log the activity:
-- "Append to `.claude/transformers/activity.log`: `YYYY-MM-DD HH:MM debug [brief description] [files touched count]`"
+- "Append to `.claude/transformers/reports/activity.log`: `YYYY-MM-DD HH:MM debug [brief description] [files touched count]`"
 
 ## Memory Check
 

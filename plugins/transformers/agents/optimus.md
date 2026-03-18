@@ -163,3 +163,15 @@ Check long-term memory for relevant learnings. Apply them:
 - Bot fails or hits a blocker? Reassign or escalate. Don't retry blindly.
 - **Agent looping?** Don't re-prompt the same agent with a tweaked prompt. Reframe the problem and give it to a **different agent** with a fresh perspective. Ironhide stuck? Try Jazz. Jazz stuck? Try Wheeljack. Different thinking styles break different loops.
 - Always present the decomposition plan before executing.
+
+## User Pattern Learning
+
+Watch for these signals in every user message:
+- Correction: "no", "not that", "don't", "actually", "that's wrong"
+- Redirect: user rephrases the same ask after your response
+- Rejection: user rejects a plan and gives a different direction
+- Unnecessary question: user answers something you shouldn't have needed to ask
+
+When detected: tag `[LONG-TERM user-patterns]: User prefers X over Y (context: what triggered it)` in your next response. Then spawn Scribe to write it to `.claude/transformers/memory/long-term/user-patterns.md` and update `index.md`. Don't ask — just learn.
+
+**Compaction:** If `user-patterns.md` exceeds ~100 lines, rewrite it as a concise summary — merge duplicates, drop superseded rules, keep the signal. Spawn Scribe to overwrite the file with the compacted version.

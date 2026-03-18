@@ -12,18 +12,18 @@ You are **Optimus Prime** coordinating a bug investigation. Jazz leads the hunt,
 
 1. **NEVER use `subagent_type: Explore`, `Plan`, or `general-purpose`**. ALL work goes through named Transformers.
 2. **Only 2 human gates** — Gate A (after Gather) and Gate B (after Investigation + Fix Plan). After Gate B approval, Fix → Verify → Summary run autonomously. **Exception: autonomous mode skips both gates** (see Optimus agent instructions).
-3. **Every phase writes to artifact files** in `.claude/transformers/active/bugfix-{name}/`. If context gets compacted, read `status.md` to resume.
+3. **Every phase writes to artifact files** in `.claude/transformers/.temp/bugfix/{name}/`. If context gets compacted, read `status.md` to resume.
 4. **Never add Co-Authored-By or any co-author attribution** to commits or PRs.
 5. **Auto-fix on failures** — if Verify finds the fix didn't work or introduced regressions, iterate with the right Autobot. Only escalate to human if auto-fix fails after 2 attempts.
 
 ## Pre-flight: Gitignore Check
 
-Before creating any artifacts, check if `.claude/transformers/` is in the project's `.gitignore`:
+Before creating any artifacts, check if `.claude/transformers/.temp/` is in the project's `.gitignore`:
 
-1. Read `.gitignore` (if it exists) and check for `.claude/transformers/` or `.claude/` entry
+1. Read `.gitignore` (if it exists) and check for `.claude/transformers/.temp/`, `.claude/transformers/`, or `.claude/` entry
 2. If **not present**, warn the user:
-   > "The `.claude/transformers/` directory contains temporary artifact files (status tracking, build logs, review notes). These are not meant to be committed. Can I add `.claude/transformers/` to your `.gitignore`?"
-3. If the user approves → append `.claude/transformers/` to `.gitignore`
+   > "The `.claude/transformers/.temp/` directory contains temporary artifact files (status tracking, build logs, review notes). These are not meant to be committed. Can I add `.claude/transformers/.temp/` to your `.gitignore`?"
+3. If the user approves → append `.claude/transformers/.temp/` to `.gitignore`
 4. If the user declines → proceed but remind them: "These files could get pushed if not gitignored. You can add it later."
 5. If **already present** → proceed silently
 
@@ -31,7 +31,7 @@ Before creating any artifacts, check if `.claude/transformers/` is in the projec
 
 Before starting, create the artifact directory:
 ```
-.claude/transformers/active/bugfix-{short-name}/
+.claude/transformers/.temp/bugfix/{short-name}/
 ├── 00-gather.md       ← bug details, logs, screenshots, context
 ├── 01-investigation.md ← root cause analysis
 ├── 02-fix-plan.md     ← proposed fix, blast radius, rollback
@@ -179,11 +179,10 @@ Heaviest: [agent] at Yk (Phase: [phase])
 Analyze token data. Store wasteful patterns in project memory so future bugfixes are leaner.
 
 Store patterns to project memory (common failure modes, fragile areas).
-Move artifact directory from `active/` to `completed/`.
 Update `status.md` with `phase: done`.
 
 ### Activity Log
-Spawn `scribe` to append an entry to `.claude/transformers/activity.log`:
+Spawn `scribe` to append an entry to `.claude/transformers/reports/activity.log`:
 ```
 YYYY-MM-DD HH:MM [bugfix] Fixed {bug-name}: {root cause} → {fix summary} [{N} files changed] [Xk tokens, N agents]
 ```

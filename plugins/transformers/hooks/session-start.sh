@@ -3,8 +3,8 @@
 # Transformers session-start hook
 # Injects core-principles and long-term memory as additionalContext at session start
 
-SKILL_FILE="plugins/transformers/skills/core-principles/SKILL.md"
-MEMORY_INDEX=".claude/transformers/memory/long-term/index.md"
+SKILL_FILE="${CLAUDE_PLUGIN_ROOT}/skills/core-principles/SKILL.md"
+MEMORY_INDEX="${CLAUDE_PROJECT_DIR}/.claude/transformers/memory/long-term/index.md"
 
 content=""
 

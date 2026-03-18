@@ -22,7 +22,7 @@ Before anything, quick check with Glob:
 2. **No package/config files?** — If there's no `pubspec.yaml`, `package.json`, `go.mod`, `Cargo.toml`, `requirements.txt`, `pyproject.toml`, or similar → "I can't detect the tech stack. What kind of project is this? I'll set up context manually."
 3. **Brand new project?** — If there are config files but very few source files → "This looks like a new project with minimal code. Want me to set up a skeleton context you can fill in as you build?"
 
-Check if `.claude/transformers/project-context.md` already exists:
+Check if `.claude/transformers/context/project.md` already exists:
 - If yes AND `$ARGUMENTS` contains `--update` → Phase 2 (incremental update)
 - If yes AND no `--update` → ask: "Project context already exists. Want me to do a full re-analysis or just update changes?"
 - If no → Phase 1 (full analysis)
@@ -58,9 +58,9 @@ Spawn agents to read key files:
 - How is data mapped between layers?
 - Any migrations or schema patterns?
 
-### Step 3: Generate project-context.md
+### Step 3: Generate project.md
 
-Create `.claude/transformers/project-context.md` with this structure:
+Create `.claude/transformers/context/project.md` with this structure:
 
 ```markdown
 # Project Context — [Project Name]
@@ -114,9 +114,16 @@ If decision rules were found, spawn Scribe to create the memory files and index.
 
 ### Step 5: Wire it up
 
+Ensure these directories exist (create if missing):
+- `.claude/transformers/context/`
+- `.claude/transformers/reports/`
+- `.claude/transformers/.temp/`
+
+Check `.gitignore` — add `.claude/transformers/.temp/` if not already present.
+
 Tell the user:
 ```
-Project context saved to `.claude/transformers/project-context.md`.
+Project context saved to `.claude/transformers/context/project.md`.
 [If memory seeded: Seeded X decision rules into long-term memory.]
 All Transformers agents will use this automatically.
 ```

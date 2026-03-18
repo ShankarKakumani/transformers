@@ -8,7 +8,7 @@ user-invocable: false
 
 You have access to project-specific decision memory that evolves over time. Memory changes how you *act*, not what you *know*.
 
-**Memory is NOT context.** Facts about the project (stack, structure, files) belong in `project-context.md`. Memory stores decision rules — what to do, what to avoid, what works, what doesn't.
+**Memory is NOT context.** Facts about the project (stack, structure, files) belong in `context/project.md`. Memory stores decision rules — what to do, what to avoid, what works, what doesn't.
 
 ### On Startup — READ
 

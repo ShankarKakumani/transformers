@@ -52,7 +52,7 @@ Skills in `skills/` inject shared knowledge into agents. Each skill has a `SKILL
 
 ### Artifact Tracking
 
-Lifecycle commands create artifacts in `.claude/transformers/active/{type}-{name}/`:
+Lifecycle commands create artifacts in `.claude/transformers/.temp/features/` or `.claude/transformers/.temp/bugfix/`:
 - Phase files: `00-gather.md`, `01-research.md`, `02-plan.md`, `03-build-log.md`, `04-review.md`
 - `status.md` — checkpointing for context recovery after `/compact`
 - `05-tokens.md` — sub-agent token usage tracking

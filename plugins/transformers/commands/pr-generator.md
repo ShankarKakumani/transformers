@@ -38,7 +38,7 @@ Do all of this BEFORE asking the user anything:
    - Compare the remote's org/owner against authenticated accounts
    - If the active account doesn't match the remote → warn and suggest switching
 
-5. **Check stored preferences**: Read `.claude/transformers/pr-preferences.md` if it exists:
+5. **Check stored preferences**: Read `.claude/transformers/context/pr-preferences.md` if it exists:
    - Last used account for this project
    - Preferred target branch
    - Preferred reviewers
@@ -49,7 +49,7 @@ Do all of this BEFORE asking the user anything:
 7. **Detect parent branch**: `git log --oneline --decorate --first-parent`
 8. **Check for uncommitted changes**: `git status`
 9. **Get the diff**: `git log <parent>..HEAD --oneline` and `git diff <parent>...HEAD`
-10. **Check for artifacts**: Look in `.claude/transformers/active/` or `.claude/transformers/completed/` for related feature/bugfix artifacts
+10. **Check for artifacts**: Look in `.claude/transformers/.temp/features/` or `.claude/transformers/.temp/bugfix/` for related feature/bugfix artifacts
 
 ## Phase 1: Confirm with the User
 
@@ -135,7 +135,7 @@ Install `gh` (GitHub) or `glab` (GitLab) for automated PR creation."
 
 ## Phase 5: Remember Preferences
 
-Save to `.claude/transformers/pr-preferences.md`:
+Save to `.claude/transformers/context/pr-preferences.md`:
 - Platform detected
 - Account used (so we can suggest it next time)
 - Target branch used

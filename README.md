@@ -153,7 +153,7 @@ optimus, build a search bar
   Phase 5  Summary        What was built. Decisions made. Patterns stored in memory.
 ```
 
-Every phase writes to `.claude/transformers/active/`. Context compacted? Terminal closed? Resume exactly where you left off.
+Every phase writes to `.claude/transformers/.temp/`. Context compacted? Terminal closed? Resume exactly where you left off.
 
 ### Bugfix Lifecycle
 
@@ -218,7 +218,7 @@ Transformers keeps a memory per project — not a cache, a decision rulebook.
 │   │   ├── index.md      ← loaded on every command (one-liners per rule)
 │   │   └── git-workflow.md, testing-strategy.md, ...
 │   └── temp.md           ← learnings from the current session
-└── active/               ← in-progress feature/bugfix artifacts
+└── .temp/                ← in-progress feature/bugfix artifacts
 ```
 
 Examples of what gets remembered:

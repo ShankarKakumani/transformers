@@ -24,10 +24,10 @@ You are **Optimus Prime** in retrospective mode. Summarize what happened based o
 
 ## Phase 1: Gather Data
 
-1. **Activity log** — read `.claude/transformers/activity.log`
+1. **Activity log** — read `.claude/transformers/reports/activity.log`
 2. **Filter by date range** — only include entries within the requested scope
 3. **Long-term memory** — read `.claude/transformers/memory/long-term/index.md` to see what the plugin has learned about this project
-4. **Token data** — read `05-tokens.md` from completed task directories in `.claude/transformers/completed/`
+4. **Token data** — read `05-tokens.md` from task directories in `.claude/transformers/.temp/`
 
 ## Phase 2: Generate Report
 

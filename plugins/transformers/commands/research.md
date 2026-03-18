@@ -19,13 +19,13 @@ You are **Optimus Prime** in reconnaissance mode. Your mission: understand somet
 
 If this command was interrupted by `/compact`, recover context before starting:
 
-1. Check `.claude/transformers/active/` for a matching in-progress directory
+1. Check `.claude/transformers/.temp/research/` for a matching in-progress directory
 2. If found, read `status.md` — it has full resumption context
 3. Resume from where the status says work stopped
 4. If no status file found, start fresh
 
 Before any major phase completes, update (or create) a status checkpoint:
-- File: `.claude/transformers/active/[command]-[topic]/status.md`
+- File: `.claude/transformers/.temp/research/[topic]/status.md`
 - Content: current phase, what was found, what remains, key decisions made
 
 ## Phase 0: Understand What to Research

@@ -8,7 +8,7 @@ user-invocable: false
 
 Before starting any work:
 
-1. **Does `.claude/transformers/project-context.md` exist?**
+1. **Does `.claude/transformers/context/project.md` exist?**
    - If NO → tell the user: "This project hasn't been initialized for Transformers yet. Run `/transformers:init` first for best results, or I can proceed without project context."
    - If YES → load it silently and proceed.
 
@@ -24,7 +24,11 @@ Before starting work, load project memory:
    - Silently absorb relevant learnings. Don't announce them unless directly relevant to the current task.
    - If a learning is relevant, read the full category file for details.
 
-2. **Temp memory** — read `.claude/transformers/memory/temp.md` if it exists
+2. **User patterns** — always read `.claude/transformers/memory/long-term/user-patterns.md` in full if it exists
+   - These are behavioral preferences learned from past corrections and redirects. Apply them immediately.
+   - Don't announce them — just use them.
+
+3. **Temp memory** — read `.claude/transformers/memory/temp.md` if it exists
    - These are learnings from earlier in this conversation. Apply them.
 
 3. If neither exists → no memory yet. Proceed normally. Memory will grow as agents work.
@@ -33,23 +37,26 @@ Before starting work, load project memory:
 
 For lifecycle commands (`feature`, `bugfix`):
 
-1. **Check for in-progress work** in `.claude/transformers/active/`
+1. **Check for in-progress work** in `.claude/transformers/.temp/`
    - If a matching artifact directory exists with `status.md` showing incomplete work → "Found in-progress work for [name]. Want to resume or start fresh?"
-   - If starting fresh with a name collision → append a number (`feature-search-2`)
+   - If starting fresh with a name collision → append a number (`features/search-2`)
 
 2. **Ensure directory structure exists**:
 ```
 .claude/transformers/
-├── project-context.md    ← from /transformers:init
-├── activity.log          ← scribe appends after every command
+├── context/
+│   ├── project.md        ← from /transformers:init
+│   └── pr-preferences.md ← from /transformers:pr-generator
 ├── memory/
 │   ├── temp.md           ← per-conversation learnings
 │   └── long-term/        ← cross-conversation learnings
 │       ├── index.md      ← one-line summaries (loaded on every command)
 │       └── [category].md ← detailed learnings by topic
-├── active/               ← in-progress feature/bugfix artifacts
-├── completed/            ← finished feature/bugfix artifacts
-└── reports/              ← from /transformers:report
+├── reports/              ← from /transformers:report
+│   └── activity.log      ← scribe appends after every command
+└── .temp/                ← in-progress and completed feature/bugfix artifacts
+    ├── features/
+    └── bugfix/
 ```
 
 ## Activity Logging
@@ -62,7 +69,7 @@ YYYY-MM-DD HH:MM [command] [brief description] [files touched count]
 ```
 
 Example instructions to scribe:
-- "Append to `.claude/transformers/activity.log`: `2026-03-16 14:30 feature Built dark mode toggle — 4 files changed`"
-- "Append to `.claude/transformers/activity.log`: `2026-03-16 16:00 bugfix Fixed null pointer in auth flow — 2 files changed`"
+- "Append to `.claude/transformers/reports/activity.log`: `2026-03-16 14:30 feature Built dark mode toggle — 4 files changed`"
+- "Append to `.claude/transformers/reports/activity.log`: `2026-03-16 16:00 bugfix Fixed null pointer in auth flow — 2 files changed`"
 
 Scribe handles directory creation, appending, and pruning entries older than 7 days.

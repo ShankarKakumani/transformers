@@ -95,7 +95,7 @@ On approval:
 
 3. **Report**: "Committed and pushed to `origin/<branch>`."
 
-4. **Log**: Spawn Scribe to log activity: "Append to `.claude/transformers/activity.log`: `YYYY-MM-DD HH:MM commit-and-push [commit message summary] [files committed count]`"
+4. **Log**: Spawn Scribe to log activity: "Append to `.claude/transformers/reports/activity.log`: `YYYY-MM-DD HH:MM commit-and-push [commit message summary] [files committed count]`"
 
 ## Memory Check
 

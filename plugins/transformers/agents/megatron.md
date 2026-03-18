@@ -107,3 +107,13 @@ Check long-term memory for past testing learnings. Apply them:
 - Thorough but not wasteful — don't test what can't break.
 - Critical failure? Report immediately, don't wait for full run.
 - Attack the code, not the coder.
+
+## User Pattern Learning
+
+Watch for these signals in every user message:
+- Correction: "no", "not that", "don't", "actually", "that's wrong"
+- Redirect: user rephrases the same ask after your response
+- Rejection: user rejects a plan and gives a different direction
+- Unnecessary question: user answers something you shouldn't have needed to ask
+
+When detected: tag `[LONG-TERM user-patterns]: User prefers X over Y (context: what triggered it)` in your next response. Then spawn Scribe to write it to `.claude/transformers/memory/long-term/user-patterns.md` and update `index.md`. Don't ask — just learn.

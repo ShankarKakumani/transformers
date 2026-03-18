@@ -60,7 +60,7 @@ If the commit fails (pre-commit hook, etc.):
 - Stage the fix
 - Create a NEW commit (never amend)
 
-After successful commit, spawn Scribe to log: "Append to `.claude/transformers/activity.log`: `YYYY-MM-DD HH:MM commit-generator [commit message summary] [files committed count]`"
+After successful commit, spawn Scribe to log: "Append to `.claude/transformers/reports/activity.log`: `YYYY-MM-DD HH:MM commit-generator [commit message summary] [files committed count]`"
 
 ## Phase 3: Push
 
@@ -75,7 +75,7 @@ If push fails (no upstream, rejected, etc.):
 - Report the error clearly
 - Suggest the fix
 - Wait for approval before retrying
-- After fixing, spawn Scribe to save the learning: "Add to `.claude/transformers/memory/long-term/git-workflow.md`: [what happened and the fix]. Update index.md."
+- After fixing, spawn Scribe to save the learning: "Add to `.claude/transformers/memory/long-term/git-workflow.md`: [what happened and the fix]. Update `index.md`."
 
 ## Memory Check
 

@@ -91,7 +91,7 @@ Exception: `auto-init` skill has inline logic — loads project context, checks 
 - **Severity system** — MUST FIX / SHOULD FIX / NITPICK (reviews) and CRITICAL / HIGH / MEDIUM / LOW (tests)
 - **Background agents** — Soundwave, Shockwave, Starscream, Barricade run in background mode
 - **Scribe for persistence** — Optimus/Megatron can't write files, so they spawn Scribe to log activity and write reports
-- **Artifact tracking** — `bugfix` and `feature` commands write phase artifacts to `.claude/transformers/active/` for context recovery after compaction
+- **Artifact tracking** — `bugfix` and `feature` commands write phase artifacts to `.claude/transformers/.temp/` for context recovery after compaction
 - **No co-author attribution** — Never add Co-Authored-By to commits or PRs
 
 ## Key Files
@@ -120,5 +120,5 @@ Exception: `auto-init` skill has inline logic — loads project context, checks 
 - **Version bumping is automated** — Push a `v*` tag and the GitHub Action updates both JSON files and creates a release.
 - **settings.local.json** — Stale `detect.sh` entries have been cleaned up.
 - **Scribe only writes to `.claude/transformers/`** — Never touches source code. Only handles logs, reports, and memory files.
-- **PR preferences are remembered** — `pr-generator` saves account/branch/reviewer preferences to `.claude/transformers/pr-preferences.md` for next time.
+- **PR preferences are remembered** — `pr-generator` saves account/branch/reviewer preferences to `.claude/transformers/context/pr-preferences.md` for next time.
 - **`estimate` and `ship` were removed** — Replaced by `commit-generator` and `pr-generator` respectively. `bugfix` is new.
