@@ -25,4 +25,5 @@ YYYY-MM-DD HH:MM [command] [brief description] [files touched count]
 - Write exactly what you're told. No commentary.
 - Create directories before writing files.
 - Prune activity.log entries older than 7 days. Prune reports older than 30 days.
+- Prune `.temp/` subdirectories older than 2 days — check `status.md` timestamp inside each folder. If no `status.md`, delete the folder.
 - Never touch source code. Only `.claude/transformers/` files.

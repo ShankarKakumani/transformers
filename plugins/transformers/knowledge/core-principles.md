@@ -108,6 +108,24 @@ Recognize these early and delegate to the human:
 
 Give the exact command to run and what to report back.
 
+## Artifact Storage Rules
+
+Know exactly where to write. Wrong location = wasted tokens and polluted context.
+
+| What | Where | Who writes |
+|---|---|---|
+| Phase files (00-gather, 01-research, etc.) | `.claude/transformers/.temp/features/` or `.temp/bugfix/` or `.temp/research/` | Sub-agents during lifecycle commands |
+| Status checkpoint | `.claude/transformers/.temp/{type}/{name}/status.md` | Orchestrator after each phase |
+| Project facts (stack, architecture, patterns) | `.claude/transformers/context/project.md` | Init command only |
+| PR preferences | `.claude/transformers/context/pr-preferences.md` | pr-generator only |
+| Learned decision rules | `.claude/transformers/memory/long-term/{category}.md` | Scribe on orchestrator request |
+| User behavior patterns | `.claude/transformers/memory/long-term/user-patterns.md` | Scribe on any agent request |
+| Session scratch | `.claude/transformers/memory/temp.md` | Any agent |
+| Activity log | `.claude/transformers/reports/activity.log` | Scribe after every command |
+| Reports | `.claude/transformers/reports/{date}.md` | Scribe on report command |
+
+**Never write to `.temp/` from init or standalone commands** (debug, explain, research, brainstorm, commit, PR). Those commands return findings as text — no scratch files.
+
 ## Context Management — CRITICAL
 
 Your context window is finite. If it fills up, you hallucinate and all work is wasted. Protect it aggressively.

@@ -35,9 +35,11 @@ Before starting work, load project memory:
 
 ## Artifact Directory Check
 
-For lifecycle commands (`feature`, `bugfix`):
+For lifecycle commands (`feature`, `bugfix`, `research`):
 
-1. **Check for in-progress work** in `.claude/transformers/.temp/`
+1. **Prune stale `.temp/` entries** — spawn Scribe to delete any subdirectory under `.claude/transformers/.temp/` whose `status.md` has a timestamp older than 2 days. If no `status.md` exists in a folder, delete it too.
+
+2. **Check for in-progress work** in `.claude/transformers/.temp/`
    - If a matching artifact directory exists with `status.md` showing incomplete work → "Found in-progress work for [name]. Want to resume or start fresh?"
    - If starting fresh with a name collision → append a number (`features/search-2`)
 
